@@ -2,7 +2,8 @@ const express = require('express');
 const router = express.Router();
 const db = require('../models/index');
 const { Op } = require('sequelize');
-const { valCheck, validationResult } = require("express-validator")
+const sendMail = require('sendmail');
+const { check, validationResult } = require("express-validator");
 const MarkdownIt = require('markdown-it');
 const markdown = new MarkdownIt();
 
@@ -88,19 +89,20 @@ router.post('/', (req, res, next) => {
 router.get('/contact', (req, res, next) => {
   if (loginCheck(req, res, next)) { return };
   var data = {
-    title: 'timeKiller/contact',
+    title: 'timeKiller/Contact',
     content: '新しいレコード',
-    form: {name: '', msg: ''},
+    form: {name: '', mail: '', detail: ''},
   }
   res.render('timeKiller/contact', data);
 });
 
 //お問い合わせフォームの送信処理
 router.post('/contact', [
-  valCheck('name', 'NAMEは必ず入力してください。').notEmpty().escape(),
-  valCheck('msg', 'お問い合わせ内容は必ず入力してください。').notEmpty().escape(),
+  check('name', 'NAMEは必ず入力してください。').notEmpty().escape(),
+  check('mail', 'MAILはメールアドレスを記入してください。').isEmail().escape(),
+  check('detail', 'お問い合わせ内容は必ず入力してください。').notEmpty().escape()
 ], (req, res, next) => {
-  if (loginCheck(req, res, next)) { return };
+  // if (loginCheck(req, res, next)) { return };
   const errors = validationResult(req);
   if (!errors.isEmpty()) {
     var result = '<ul class="text-danger">';
@@ -108,13 +110,23 @@ router.post('/contact', [
     for(var n in result_arr){
       result +='<li>'+ result_arr[n].msg + '</li>';
     }
-    result += '<ul>';
+    result += '</ul>';
     var data = {
+      title: 'timeKiller/contact',
       content: result,
       form: req.body,
     }
     res.render('timeKiller/contact', data);
   }else{
+    sendMail({
+      from: req.body.mail,
+      to: 'r201704579zy@jindai.jp',
+      subject: req.body.name,
+      text: req.body.detail,
+    }, function(err, reply) {
+      console.log(err && err.stack);
+      console.dir(reply);
+  });
     res.redirect('/timeKiller');
   }
 });

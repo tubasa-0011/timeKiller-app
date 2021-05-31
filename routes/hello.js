@@ -53,7 +53,7 @@ router.post('/add', [
     for(var n in result_arr){
       result +='<li>'+ result_arr[n].msg + '</li>';
     }
-    result += '<ul>';
+    result += '</ul>';
     var data = {
       title: 'Hello/Add',
       content: result,
