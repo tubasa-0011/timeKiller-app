@@ -3,32 +3,81 @@
 
 <head>
   <meta http-equiv="content-type" content="text/html; charset=UTF-8">
-  <title><%= title %></title>
-  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css"
-    crossorigin="anonymous">
-  <link rel='stylesheet' href='/stylesheets/style.css' />
+  <title>
+    <%= title %>
+  </title>
+  <!-- <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css"
+    crossorigin="anonymous"> -->
+  <link rel="stylesheet" href='/stylesheets/style.css' />
 </head>
 
-<body class="container">
-  <header>
-    <h1 class="display-4"><%= title %></h1>
-  </header>
-  <div role="main">
-    <p><%- content %></p>
-    <form action="/users/login" method="post">
-      <div class="form-group">
-        <label for="name">NAME</label>
-        <input type="text" name="name" id="name" class="form-control">
+<body>
+  <div class="container">
+    <div class="welcome">
+      <div class="pinkbox" id="pinkbox">
+        <div class="signup nodisplay">
+          <h1>register</h1>
+          <form autocomplete="off"action="/users/login" method="post">
+            <input type="text" placeholder="username">
+            <input type="email" placeholder="email">
+            <input type="password" placeholder="password">
+            <input type="password" placeholder="confirm password">
+            <button class="button submit">create account </button>
+          </form>
+        </div>
+        <div class="signin">
+          <h1>sign in</h1>
+          <h3><%- content %> </h3>
+          <form class="more-padding" autocomplete="off"action="/users/login" method="post">
+            <input type="text" placeholder="username"name="name" id="name" class="form-control">
+            <input type="password" placeholder="password"name="pass" id="pass" class="form-control">
+            <div class="checkbox">
+              <input type="checkbox" id="gest" /><label for="gest login">gest login</label>
+            </div>
+            <button class="button submit">login</button>
+          </form>
+        </div>
       </div>
-      <div class="form-group">
-        <label for="pass">PASSWORD</label>
-        <input type="password" name="pass" id="pass" class="form-control">
+      <div class="leftbox">
+        <h2 class="title"><span>TIME</span><br>KILLER</h2>
+        <p class="desc">the best time <span>for you</span></p>
+        <img class="image" src="/images/pink.jpg">
+        <p class="account">have an account?</p>
+        <button class="button" id="signin">login</button>
       </div>
-      <input type="submit" value="ログイン" class="btn btn-primary">
-    </form>
-    <p class="mt-4"><a href="/boards">&lt;&lt; Top へ戻る</a> | 
-    <a href="/users/add">アカウントの作成&gt;&gt;</a></p>
+      <div class="rightbox">
+        <h2 class="title"><span>TIME</span><br>KILLER</h2>
+        <p class="desc"> the best time <span>for you</span></p>
+        <img class="image" src="/images/pink.jpg">
+        <p class="account">don't have an account?</p>
+        <button class="button" id="signup">sign up</button>
+      </div>
+    </div>
+  </div>
+
   </div>
 </body>
+<script>
+  var pink = document.getElementById("pinkbox");
+  var signin = document.getElementById("signin");
+  var signup = document.getElementById("signup");
+  var signin2 = document.getElementsByClassName("signin");
+  var signup2 = document.getElementsByClassName("signup");
+  signin.addEventListener("click", function (event) {
+    pink.classList.add('pinkbox');
+    pink.classList.remove('pinkbox2');
+    signup2[0].classList.add('nodisplay');
+    signin2[0].classList.remove('nodisplay');
+  }, false);
+
+  signup.addEventListener("click", function (event) {
+    pink.classList.add('pinkbox2');
+    pink.classList.remove('pinkbox');
+    signin2[0].classList.add('nodisplay');
+    signup2[0].classList.remove('nodisplay');
+    console.log(signin)
+    console.log(signup)
+  }, false);
+</script>
 
 </html>
