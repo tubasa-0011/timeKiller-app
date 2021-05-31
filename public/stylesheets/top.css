@@ -1,0 +1,51 @@
+body {
+  font: 14px "Lucida Grande", Helvetica, Arial, sans-serif;
+  color: #fff;
+  background: linear-gradient(#fbca4d, #fff);
+  font-family: 'Hachi Maru Pop', cursive;
+}
+
+header {
+  background-color: #f2a0a1;
+  text-align: center;
+}
+
+header h1 {
+  font-size: 40px;
+  letter-spacing: 8px;
+}
+
+header h2 {
+  font-size: 30px;
+}
+
+.timeInp {
+  background-color: #f2a0a1;
+  margin: 20px auto;
+  width: 60%;
+  text-align: center;
+}
+
+.btn {
+  display: inline-block;
+  width: 60%;
+  margin: 0 auto;
+  text-align: center;
+  font-size: 30px;
+  background: radial-gradient(#f2a0a1, #fff);
+  color: #fff;
+  padding: 20px 24px;
+  border-radius: 15px;
+  cursor: pointer;
+  box-shadow: 0 7px #a0a0a0;
+}
+
+.btn:active {
+  box-shadow: none;
+  position: relative;
+  top: 7px;
+}
+
+footer {
+  background-color: #f2a0a1;
+}

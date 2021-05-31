@@ -1,42 +1,36 @@
 <!DOCTYPE html>
 <html lang="ja">
-
+    
 <head>
-  <meta http-equiv="content-type" content="text/html; charset=UTF-8">
-  <title><%= title %></title>
-  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css"
-    crossorigin="anonymous">
-  <link rel='stylesheet' href='/stylesheets/style.css' />
+    <meta http-equiv="content-type" content="text/html;" charset="UTF-8">
+    <title><%=title %></title>
+    <!-- <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" crossorigin="anonymous"> -->
+    <link rel="stylesheet" href="/stylesheets/sanitize.css">
+    <link rel="stylesheet" href='/stylesheets/top.css' />
+    <link rel="preconnect" href="https://fonts.gstatic.com">
+    <link href="https://fonts.googleapis.com/css2?family=Hachi+Maru+Pop&display=swap" rel="stylesheet"> 
 </head>
 
 <body class="container">
-  <header>
-    <h1 class="display-4 text-primary"><%= title %></h1>
-  </header>
-  <div role="main">
-    <p class="h5 my-4">Hi,<span><%= login.name %></span>!<br>
-    Welcome to <%= title %>.</p>
-    <form action="/timeKiller" method="post">
-      <div class="form-group">
-        <label for="find">FIND</label>
-        <input type="text" name="find" id="find" value="<%= form.find %>" class="form-control">
+
+    <header>
+        <h1 class="display-4"><%=title %></h1>
+        <h2 class="display-4"><%=name %>さんこんにちは！</h2>
+        <a href="#">ハンバーガー</a>
+    </header>
+    <div role="main">
+      <div class="timeInp">
+        <label for="name">何分時間をつぶす？？：</label>
+        <input type="text" name="time" id="time" class="form-control">
       </div>
-      <input type="submit" value="検索" class="btn btn-primary">
-    </form>
-    <p class="my-4 h5"><%= message %> </p>
-    <table class="table">
-      <% for(var i in content) {%>
-      <% var ob = content[i]; %>
-      <tr>
-        <td>
-          <a href="/timeKiller/mark/<%= ob.id %>" class="text-dark"><%= ob.title %></a>
-        </td>
-      </tr>
-      <% } %>
-    </table>
-    <p> </p>
-    <p><a href="/timeKiller/contact">※お問い合わせ</a></p>
-  </div>
+        <a href="#" class="btn btn_start">ひまつぶしを始める</a>
+    </div>
+    <footer>
+        <h3>最新のプレイリスト</h3>
+        <p><%=namename %>さん</p>
+        <h4>バージョンアップ情報</h4>
+        <p>ver<%=ver %></p>
+    </footer>
 </body>
 
 </html>

@@ -32,11 +32,10 @@ router.get('/', (req, res, next) => {
     ]
   }).then(mds => {
     var data = {
-      title: 'timeKiller Search',
-      login: req.session.login,
-      message: '※最近の投稿データ',
-      form: { find: '' },
-      content: mds,
+      title: 'たいむきらー',
+      name: 'name',
+      namename: 'さとう',
+      ver: 2.0
     }
     res.render('timeKiller/index', data);
   })
