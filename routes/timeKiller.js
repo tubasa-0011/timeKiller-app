@@ -2,6 +2,7 @@ const express = require('express');
 const router = express.Router();
 const db = require('../models/index');
 const { Op } = require('sequelize');
+const { valCheck, validationResult } = require("express-validator")
 const MarkdownIt = require('markdown-it');
 const markdown = new MarkdownIt();
 
@@ -9,7 +10,7 @@ const markdown = new MarkdownIt();
 const pNum = 10;
 
 //ログインチェックの関数
-function check(req, res) {
+function loginCheck(req, res) {
   if (req.session.login == null) {
     req.session.back = '/timeKiller';
     res.redirect('/users/login');
@@ -21,7 +22,7 @@ function check(req, res) {
 
 // トップページへのアクセス
 router.get('/', (req, res, next) => {
-  if (check(req, res, next)) { return };
+  if (loginCheck(req, res, next)) { return };
   db.Markdata.findAll({
     where: { userId: req.session.login.id },
     limit: pNum,
@@ -42,7 +43,7 @@ router.get('/', (req, res, next) => {
 
 //検索フォームの送信処理
 router.post('/', (req, res, next) => {
-  if (check(req, res, next)) { return };
+  if (loginCheck(req, res, next)) { return };
   db.Markdata.findAll({
     where: {
       userId: req.session.login.id,
@@ -83,24 +84,39 @@ router.post('/', (req, res, next) => {
 //     );
 // });
 
-//新規作成ページ
+//お問い合わせページ
 router.get('/contact', (req, res, next) => {
-  if (check(req, res, next)) { return };
-  res.render('timeKiller/contact', { title: 'timeKiller/Contact' });
+  if (loginCheck(req, res, next)) { return };
+  var data = {
+    title: 'timeKiller/contact',
+    content: '新しいレコード',
+    form: {name: '', msg: ''},
+  }
+  res.render('timeKiller/contact', data);
 });
 
-//新規作成フォームの送信処理
-router.post('/contact', (req, res, next) => {
-  if (check(req, res, next)) { return };
-  db.sequelize.sync().then(() => db.Markdata.create({
-      name: req.session.login.name,
-      title: req.body.title,
-      content: req.body.content,
-    })
-      .then(model => {
-        res.redirect('/timeKiller');
-      })
-    );
+//お問い合わせフォームの送信処理
+router.post('/contact', [
+  valCheck('name', 'NAMEは必ず入力してください。').notEmpty().escape(),
+  valCheck('msg', 'お問い合わせ内容は必ず入力してください。').notEmpty().escape(),
+], (req, res, next) => {
+  if (loginCheck(req, res, next)) { return };
+  const errors = validationResult(req);
+  if (!errors.isEmpty()) {
+    var result = '<ul class="text-danger">';
+    var result_arr = errors.array();
+    for(var n in result_arr){
+      result +='<li>'+ result_arr[n].msg + '</li>';
+    }
+    result += '<ul>';
+    var data = {
+      content: result,
+      form: req.body,
+    }
+    res.render('timeKiller/contact', data);
+  }else{
+    res.redirect('/timeKiller');
+  }
 });
 
 //'/mark'へのアクセスしたさいのリダイレクト
@@ -111,7 +127,7 @@ router.get('/mark', (req, res, next) => {
 
 //指定IDのMarkdata表示
 router.get('/mark/:id', (req, res, next) => {
-  if (check(req, res)) { return };
+  if (loginCheck(req, res)) { return };
   db.Markdata.findOne({
     where: {
       id: req.params.id,
@@ -125,7 +141,7 @@ router.get('/mark/:id', (req, res, next) => {
 
 //Markdataの更新処理
 router.post('/mark/:id', (req, res, next) => {
-  if (check(req, res)) { return };
+  if (loginCheck(req, res)) { return };
   db.Markdata.findByPk(req.params.id)
     .then(md => {
       md.content = req.body.source;

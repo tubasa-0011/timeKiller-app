@@ -14,16 +14,18 @@
     <h1 class="display-4 text-primary"><%= title %></h1>
   </header>
   <div role="main">
-    <form action="/timeKiller/contact" method="post">
+    <form action="mailto:r201704579zy@jindai.jp" method="post" enctype="text/plain">
       <div class="form-group">
-        <label for="title">TITLE</label>
-        <input type="text" name="title" id="title" class="form-control">
+        <label for="name">アカウント名</label>
+        <input type="text" name="name" id="name" class="form-control" value="<%= form.name %>">
       </div>
-      <div class="form-group">
-        <label for="content">CONTENT</label>
-        <input type="text" name="content" id="content" class="form-control">
+      <div class="form-group"></div>
+        <label for="msg">お問い合わせ</label>
+        <TEXTAREA name="msg" id="msg" rows="5" class="form-control" value="<%= form.msg %>"></TEXTAREA>
       </div>
-      <input type="submit" value="送信" class="btn btn-primary">
+      <br>
+        <INPUT type="submit" value="送信" class="btn btn-primary">
+        <INPUT type="reset" value="クリア" class="btn btn-primary">
     </form>
     <p class="mt-4"><a href="/timeKiller">&lt;&lt; Top へ戻る</a></p>
   </div>
