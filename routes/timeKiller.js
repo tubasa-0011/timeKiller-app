@@ -88,7 +88,7 @@ router.post('/', (req, res, next) => {
 router.get('/contact', (req, res, next) => {
   if (loginCheck(req, res, next)) { return };
   var data = {
-    title: 'timeKiller/Contact',
+    title: 'お問い合わせ',
     content: '',
     form: {subject: '', mail: '', detail: ''},
   }
@@ -111,7 +111,7 @@ router.post('/contact', [
     }
     result += '</ul>';
     var data = {
-      title: 'timeKiller/contact',
+      title: 'お問い合わせ',
       content: result,
       form: req.body,
     }
