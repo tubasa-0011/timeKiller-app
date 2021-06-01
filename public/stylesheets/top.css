@@ -1,41 +1,98 @@
 body {
-  font: 14px "Lucida Grande", Helvetica, Arial, sans-serif;
+  margin: 0;
+  padding: 0;
   color: #fff;
-  background: linear-gradient(#fbca4d, #fff);
+  background: linear-gradient(#fbca4d, #fade96);
   font-family: 'Hachi Maru Pop', cursive;
 }
 
 header {
+  margin-top: 0;
   background-color: #f2a0a1;
   text-align: center;
+  height: 200px;
+  margin: 0;
 }
-
 header h1 {
+  margin: 0;
   font-size: 40px;
   letter-spacing: 8px;
 }
-
 header h2 {
+  margin: 0;
   font-size: 30px;
 }
 
+/* ハンバーガー */
+.btn_g {
+  text-align: right;
+}
+.btn_g a {
+  display: inline-block;
+  text-align: center;
+}
+#open a {
+  background: #eee;
+  width: 30px;
+  line-height: 30px;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  transition: 1s;
+}
+#close a {
+  color: #fff;
+  background: #aaa;
+  width: 30px;
+  line-height: 30px;
+  border-radius: 15px;
+}
+#g_menu li {
+  list-style: none;
+}
+#g_menu a {
+  color: #fff;
+}
+#g_menu {
+  height: 100%;
+  width: 300px;
+  padding: 20px;
+  background: rgba(0, 0, 0,.6);
+  transition: right 1s;
+  position: fixed;
+  top: 0;
+}
+.outside {
+    right: -100%;
+}
+.inside {
+    right: 0;
+}
 .timeInp {
   background-color: #f2a0a1;
   margin: 20px auto;
-  width: 60%;
+  width: 40%;
   text-align: center;
+  padding: 20px;
 }
 
-.btn {
-  display: inline-block;
-  width: 60%;
-  margin: 0 auto;
+input {
+  background-color: #fff;
+}
+
+.btn_wrapper {
   text-align: center;
+  margin: 100px 0;
+}
+
+.btn_start{
+  display: inline-block;
+  width: 40%;
   font-size: 30px;
-  background: radial-gradient(#f2a0a1, #fff);
-  color: #fff;
   padding: 20px 24px;
   border-radius: 15px;
+  text-align: center;
+  background: radial-gradient(#f2a0a1, #f2c2c3);
+  color: #fff;
   cursor: pointer;
   box-shadow: 0 7px #a0a0a0;
 }
@@ -48,4 +105,18 @@ header h2 {
 
 footer {
   background-color: #f2a0a1;
+  margin: 0;
+  padding: 0;
+}
+
+footer h3 {
+  margin: 0;
+}
+
+footer h4 {
+  margin: 0;
+}
+
+footer p {
+  margin: 0;
 }
