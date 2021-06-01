@@ -1,0 +1,67 @@
+body {
+  font: 14px "Lucida Grande", Helvetica, Arial, sans-serif;
+  color: #fff;
+  background: rgba(209, 172, 77, 0.863);
+  font-family: 'Hachi Maru Pop', cursive;
+  margin: 0;
+  padding: 0;
+}
+
+header {
+  background-color: #f2a0a1cc;
+  text-align: center;
+  margin: 0;
+  padding: 0;
+}
+
+header h1 {
+  letter-spacing: 0.2em;
+  font-size: 4em;
+  color: white;
+  margin: 0;
+  padding: 0;
+}
+
+label{
+  font-size: 1.5em;
+}
+
+.text-danger{
+  font-size: 1.5em;
+  background-color: white;
+}
+
+.playlist-btn {
+  display: inline-block;
+  width: 50%;
+  margin: 0;
+  text-align: center;
+  font-size: 30px;
+  background: radial-gradient(#f2a0a1cc, rgba(255, 255, 255, 0.432));
+  color: #fff;
+  padding: 20px 24px;
+  border-radius: 15px;
+  cursor: pointer;
+  box-shadow: 0 7px #a0a0a0;
+}
+
+.playlist-btn:active {
+  box-shadow: none;
+  position: relative;
+  top: 7px;
+}
+
+a{
+  font-size: 1.2em;
+  color: white;
+  text-decoration: underline;
+}
+
+th{
+  padding: 0.5em 1em;
+  margin: 0;
+}
+/* 大きく */
+input[type="checkbox"]{
+  transform: scale(2);
+}

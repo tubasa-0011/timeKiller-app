@@ -2,7 +2,7 @@ const express = require('express');
 const router = express.Router();
 const db = require('../models/index');
 const { Op } = require('sequelize');
-const sendMail = require('sendmail');
+const sendMail = require('sendmail')();
 const { check, validationResult } = require("express-validator");
 const MarkdownIt = require('markdown-it');
 const markdown = new MarkdownIt();
@@ -84,24 +84,39 @@ router.post('/', (req, res, next) => {
 //     );
 // });
 
+//プレイリストページ
+router.get('/playlist', (req, res, next) => {
+  if (loginCheck(req, res, next)) { return };
+  var data = {
+    title: 'プレイリスト変更ページ',
+  }
+  res.render('timeKiller/playlist', data);
+});
+
+//プレイリストフォームの送信処理
+router.post('/playlist', (req, res, next) => {
+  if (loginCheck(req, res, next)) { return };
+  res.redirect('/timeKiller');
+});
+
 //お問い合わせページ
 router.get('/contact', (req, res, next) => {
   if (loginCheck(req, res, next)) { return };
   var data = {
-    title: 'timeKiller/Contact',
-    content: '新しいレコード',
-    form: {name: '', mail: '', detail: ''},
+    title: 'お問い合わせ',
+    content: '',
+    form: {subject: '', mail: '', detail: ''},
   }
   res.render('timeKiller/contact', data);
 });
 
 //お問い合わせフォームの送信処理
 router.post('/contact', [
-  check('name', 'NAMEは必ず入力してください。').notEmpty().escape(),
-  check('mail', 'MAILはメールアドレスを記入してください。').isEmail().escape(),
+  check('subject', 'SUBJECTは必ず記入してください').notEmpty().escape(),
+  check('mail', 'メールアドレス形式で必ず記入してください。').isEmail().escape(),
   check('detail', 'お問い合わせ内容は必ず入力してください。').notEmpty().escape()
 ], (req, res, next) => {
-  // if (loginCheck(req, res, next)) { return };
+  if (loginCheck(req, res, next)) { return };
   const errors = validationResult(req);
   if (!errors.isEmpty()) {
     var result = '<ul class="text-danger">';
@@ -111,7 +126,7 @@ router.post('/contact', [
     }
     result += '</ul>';
     var data = {
-      title: 'timeKiller/contact',
+      title: 'お問い合わせ',
       content: result,
       form: req.body,
     }
@@ -119,13 +134,13 @@ router.post('/contact', [
   }else{
     sendMail({
       from: req.body.mail,
-      to: 'r201704579zy@jindai.jp',
-      subject: req.body.name,
+      to: 't.tanaka@cuore.jp',
+      subject: '㋪アプリ：' + req.session.login.name + '：' + req.body.subject,
       text: req.body.detail,
     }, function(err, reply) {
       console.log(err && err.stack);
       console.dir(reply);
-  });
+    });
     res.redirect('/timeKiller');
   }
 });
