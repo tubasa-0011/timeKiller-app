@@ -5,7 +5,7 @@ var cookieParser = require('cookie-parser');
 var logger = require('morgan');
 var session = require('express-session');
 //ルート用のモジュールロード
-var indexRouter = require('./routes/index');
+var indexRouter = require('./routes/timeKiller');
 var usersRouter = require('./routes/users');
 var helloRouter = require('./routes/hello');
 var boardsRouter = require('./routes/boards');
