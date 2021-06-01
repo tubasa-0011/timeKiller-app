@@ -84,6 +84,21 @@ router.post('/', (req, res, next) => {
 //     );
 // });
 
+//プレイリストページ
+router.get('/playlist', (req, res, next) => {
+  if (loginCheck(req, res, next)) { return };
+  var data = {
+    title: 'プレイリスト変更ページ',
+  }
+  res.render('timeKiller/playlist', data);
+});
+
+//プレイリストフォームの送信処理
+router.post('/playlist', (req, res, next) => {
+  if (loginCheck(req, res, next)) { return };
+  res.redirect('/timeKiller');
+});
+
 //お問い合わせページ
 router.get('/contact', (req, res, next) => {
   if (loginCheck(req, res, next)) { return };
@@ -125,7 +140,7 @@ router.post('/contact', [
     }, function(err, reply) {
       console.log(err && err.stack);
       console.dir(reply);
-  });
+    });
     res.redirect('/timeKiller');
   }
 });
