@@ -41,6 +41,22 @@ router.get('/', (req, res, next) => {
   })
 });
 
+// 開発者ページへのアクセス
+router.get('/developer', (req, res, next) => {
+  if (loginCheck(req, res, next)) { return };
+  var data = {
+    title: 'たいむきらー',
+    title2: 'かいはつしゃじょーほー',
+    tanakaName: '田中 翼',
+    tanakaText: 'ほげほげ',
+    nakamuraName: '中村 航生',
+    nakamuraText: 'ほほげげ',
+    satoName: '佐藤 翔大',
+    satoText: '東京電機大学卒業。2021年4月に株式会社クオーレに入社。プログラム歴3ヶ月（2021年6月現在）。趣味はゲーム、漫画、アニメ、野球観戦等々。水族館溺愛者。肩こりが悩み。',
+  }
+  res.render('timeKiller/developer', data);
+});
+
 //検索フォームの送信処理
 router.post('/', (req, res, next) => {
   if (loginCheck(req, res, next)) { return };
