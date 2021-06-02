@@ -139,20 +139,28 @@ footer p {
 .members {
   display: flex;
   justify-content: space-evenly;
+  margin: 50px 0;
+  height: 400px;
 }
 .member {
   width: 25%;
   border: 4px solid;
   border-color: #f2a0a1;
   border-radius: 8px;
+  padding: 0;
 }
 .member h1 {
   background-color: #f2a0a1;
-  margin-bottom: 0;
+  margin: 0;
   text-align: center;
 }
 .member p {
-  margin-top: 0;
+  margin: 0;
   color: #f2a0a1;
   background-color: #fff;
+  font-size: 20px;
+}
+
+img {
+  width: 50px;
 }
