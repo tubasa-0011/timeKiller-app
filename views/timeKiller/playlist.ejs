@@ -2,131 +2,29 @@
 <html lang="ja">
 
 <head>
-  <meta http-equiv="content-type" content="text/html; charset=UTF-8">
-  <title>
-    <%= title %>
-  </title>
-  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css"
-    crossorigin="anonymous">
-    <link rel="stylesheet" href="/stylesheets/playlist.css">
-  <link rel="preconnect" href="https://fonts.gstatic.com">
-  <link href="https://fonts.googleapis.com/css2?family=Hachi+Maru+Pop&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="/stylesheets/sanitize.css">
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title><%=title %></title>
+    <!-- <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta1/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-giJF6kkoqNQ00vy+HMDP7azOuL0xtbfIcaT9wjKHr8RbDVddVHyTfAAsrekwKmP1" crossorigin="anonymous"> -->
+        <link rel="stylesheet" href="/stylesheets/playlist.css">
 </head>
 
-<body>
-  <header>
-    <h1 class="display-4"><%= title %></h1>
-  </header>
-  <div role="main" class="container">
-    <form action="/timeKiller/playlist" method="post">
-      <table>
-        <tr>
-          <th>
-            <div class="form-check">
-              <input class="form-check-input" type="checkbox" id="check1a">
-              <label class="form-check-label" for="check1a">動画リンク</label>
-            </div>
-          </th>
-          <th>
-            <div class="form-check">
-              <input class="form-check-input" type="checkbox" id="check1b">
-              <label class="form-check-label" for="check1b">SNSリンク</label>
-            </div>
-          </th>
-          <th>
-            <div class="form-check">
-              <input class="form-check-input" type="checkbox" id="check1b">
-              <label class="form-check-label" for="check1b">占いリンク</label>
-            </div>
-          </th>
-        </tr>
-        <tr>
-          <th>
-            <div class="form-check">
-              <input class="form-check-input" type="checkbox" id="check1b">
-              <label class="form-check-label" for="check1b">音楽リンク</label>
-            </div>
-          </th>
-          <th>
-            <div class="form-check">
-              <input class="form-check-input" type="checkbox" id="check1b">
-              <label class="form-check-label" for="check1b">まとめサイトリンク</label>
-            </div>
-          </th>
-          <th>
-            <div class="form-check">
-              <input class="form-check-input" type="checkbox" id="check1b">
-              <label class="form-check-label" for="check1b">ゲーム（ボードゲーム）リンク</label>
-            </div>
-          </th>
-        </tr>
-        <tr>
-          <th>
-            <div class="form-check">
-              <input class="form-check-input" type="checkbox" id="check1b">
-              <label class="form-check-label" for="check1b">本（青空文庫）リンク</label>
-            </div>
-          </th>
-          <th>
-            <div class="form-check">
-              <input class="form-check-input" type="checkbox" id="check1b">
-              <label class="form-check-label" for="check1b">ウィキランダムリンク</label>
-            </div>
-          </th>
-          <th>
-            <div class="form-check">
-              <input class="form-check-input" type="checkbox" id="check1b">
-              <label class="form-check-label" for="check1b">名言集（ランダムでサイト提示）リンク</label>
-            </div>
-          </th>
-        </tr>
-        <tr>
-          <th>
-            <div class="form-check">
-              <input class="form-check-input" type="checkbox" id="check1b">
-              <label class="form-check-label" for="check1b">ウェブラジオリンク</label>
-            </div>
-          </th>
-          <th>
-            <div class="form-check">
-              <input class="form-check-input" type="checkbox" id="check1b">
-              <label class="form-check-label" for="check1b">なぞなぞ・クイズリンク</label>
-            </div>
-          </th>
-          <th>
-            <div class="form-check">
-              <input class="form-check-input" type="checkbox" id="check1b">
-              <label class="form-check-label" for="check1b">名言作成リンク</label>
-            </div>
-          </th>
-        </tr>
-        <tr>
-          <th>
-            <div class="form-check">
-              <input class="form-check-input" type="checkbox" id="check1b">
-              <label class="form-check-label" for="check1b">ニュースリンク</label>
-            </div>
-          </th>
-          <th>
-            <div class="form-check">
-              <input class="form-check-input" type="checkbox" id="check1b">
-              <label class="form-check-label" for="check1b">心理テストリンク</label>
-            </div>
-          </th>
-          <th>
-            <div class="form-check">
-              <input class="form-check-input" type="checkbox" id="check1b">
-              <label class="form-check-label" for="check1b">名言作成リンク</label>
-            </div>
-          </th>
-        </tr>
-      </table>
-      <input type="submit" value="作成" class="playlist-btn">
-    </form>
-    <form action="/timekiller" method="post"></form>
-    <p class="mt-4"><a href="/timeKiller">&lt;&lt; Top へ戻る</a></p>
-  </div>
+<body class="container">
+    <header>
+        <h1 class="display-4"><%=title %></h1>
+    </header>
+    <div role="main">
+        <p><%=content %></p>
+        <ul class=”menu”>
+            <% var id=0; %>
+            <% for(var key in data) {%>
+            <%- include('playlistData_item',
+                {id:++id,key:key,val:[data[key]]}) %>
+            <% } %>
+        </ul>
+    </div>
 </body>
 
 </html>

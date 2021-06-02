@@ -7,7 +7,6 @@ const { check, validationResult } = require("express-validator");
 const MarkdownIt = require('markdown-it');
 const markdown = new MarkdownIt();
 
-
 const pNum = 10;
 
 //ログインチェックの関数
@@ -84,19 +83,39 @@ router.post('/', (req, res, next) => {
 //     );
 // });
 
+//プレイリスト用データ
+let playlistData = {
+  'check01': ['動画リンク','音楽リンク'],
+  'check02': ['音楽リンク'],
+  'check03': ['本（青空文庫）リンク'],
+  'check04': ['ウェブラジオリンク'],
+  'check05': ['ニュースリンク'],
+  'check06': ['SNSリンク'],
+  'check07': ['まとめサイトリンク'],
+  'check08': ['ウィキランダムリンク'],
+  'check09': ['なぞなぞ・クイズリンク'],
+  'check10': ['心理テストリンク'],
+  'check11': ['ゲーム（ボードゲーム）リンク'],
+  'check12': ['名言集（ランダムでサイト提示）リンク'],
+  'check13': ['名言作成 リンク'],
+};
+
 //プレイリストページ
 router.get('/playlist', (req, res, next) => {
-  if (loginCheck(req, res, next)) { return };
-  var data = {
-    title: 'プレイリスト変更ページ',
-  }
-  res.render('timeKiller/playlist', data);
+  var msg = "これはotherページです。"
+    var data = {
+        title: "Other",
+        content: msg,
+        data: playlistData,
+        filename: 'data_item'
+    }
+    res.render('timeKiller/playlist', data);
 });
 
 //プレイリストフォームの送信処理
 router.post('/playlist', (req, res, next) => {
-  if (loginCheck(req, res, next)) { return };
-  res.redirect('/timeKiller');
+  if (check(req, res, next)) { return }
+  redirect('/timeKiller')
 });
 
 //お問い合わせページ
