@@ -14,35 +14,27 @@
 <body class="container">
 
     <header>
-        <div id="open" class="btn btn_g"><a href="#g_menu">三</a></div>
-          <div id="g_menu" class="outside">
-            <div id="close" class="btn btn_g"><a href="#">×</a></div>
-            <ul>
-              <li><a href="/timeKiller/playlist">マイプレイリスト</a></li>
-              <li><a href="/timeKiller/contact">お問い合わせ</a></li>
-              <li><a href="/timeKiller/developer">製作者情報</a></li>
-            </ul>
-          </div>
         <h1 class="display-4"><%=title %></h1>
-        <h2 class="display-4"><%=name %>さんこんにちは！</h2>
+        <h2 class="display-4"><%=title2 %></h2>
     </header>
     <div role="main">
-      <div class="timeInp">
-        <label for="name">何分時間をつぶす？？：</label>
-        <input type="number" name="time" id="time" class="form-control">
-        <label for="name">分</label>
-      </div>
-      <div class="btn_wrapper">
-        <a href="#" class="btn btn_start">ひまつぶしを始める</a>
+      <div class="members">
+        <div class="member tanaka">
+          <h1><%=tanakaName %></h1>
+          <p><%=tanakaText %></p>
+        </div>
+        <div class="member nakamura">
+          <h1><%=nakamuraName %></h1>
+          <p><%=nakamuraText %></p>
+        </div>
+        <div class="member sato">
+          <h1><%=satoName %></h1>
+          <p><%=satoText %></p>
+        </div>
       </div>
     </div>
     <footer>
-        <h3>最新のプレイリスト</h3>
-        <p><%=namename %>さん</p>
-        <div class="ver">
-          <h4>バージョンアップ情報</h4>
-          <p>ver<%=ver %></p>
-        </div>
+      <p class="mt-4"><a href="/timeKiller">&lt;&lt; Top へ戻る</a></p>
     </footer>
 
 <!-- ハンバーガーメニュー -->

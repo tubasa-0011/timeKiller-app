@@ -6,6 +6,10 @@ body {
   font-family: 'Hachi Maru Pop', cursive;
 }
 
+a {
+  text-decoration: none;
+}
+
 header {
   margin-top: 0;
   background-color: #f2a0a1;
@@ -32,12 +36,13 @@ header h2 {
   text-align: center;
 }
 #open a {
-  background: #eee;
+  background: transparent;
   width: 30px;
   line-height: 30px;
-  border: 1px solid #ccc;
+  border: 1px solid #fff;
   border-radius: 5px;
   transition: 1s;
+  color: #fff;
 }
 #close a {
   color: #fff;
@@ -67,30 +72,36 @@ header h2 {
 .inside {
     right: 0;
 }
+
+/* 時間入力 */
 .timeInp {
   background-color: #f2a0a1;
   margin: 20px auto;
-  width: 40%;
+  width: 30%;
   text-align: center;
   padding: 20px;
 }
-
 input {
   background-color: #fff;
+  color: #f2a0a1;
 }
 
+/* スタートボタン */
 .btn_wrapper {
   text-align: center;
+  /* vertical-align: middle; */
   margin: 100px 0;
 }
 
 .btn_start{
   display: inline-block;
   width: 40%;
-  font-size: 30px;
+  height: 200px;
+  font-size: 50px;
   padding: 20px 24px;
   border-radius: 15px;
   text-align: center;
+  /* vertical-align: middle; */
   background: radial-gradient(#f2a0a1, #f2c2c3);
   color: #fff;
   cursor: pointer;
@@ -103,20 +114,53 @@ input {
   top: 7px;
 }
 
+/* フッター */
 footer {
   background-color: #f2a0a1;
   margin: 0;
   padding: 0;
+  height: 200px;
 }
-
 footer h3 {
   margin: 0;
 }
-
 footer h4 {
   margin: 0;
 }
-
 footer p {
   margin: 0;
+}
+
+.ver {
+  float: right;
+}
+
+/* 製作者情報 */
+.members {
+  display: flex;
+  justify-content: space-evenly;
+  margin: 50px 0;
+  height: 400px;
+}
+.member {
+  width: 25%;
+  border: 4px solid;
+  border-color: #f2a0a1;
+  border-radius: 8px;
+  padding: 0;
+}
+.member h1 {
+  background-color: #f2a0a1;
+  margin: 0;
+  text-align: center;
+}
+.member p {
+  margin: 0;
+  color: #f2a0a1;
+  background-color: #fff;
+  font-size: 20px;
+}
+
+img {
+  width: 50px;
 }
