@@ -37,12 +37,14 @@ header h2 {
 }
 #open a {
   background: transparent;
-  width: 30px;
-  line-height: 30px;
-  border: 1px solid #fff;
+  width: 50px;
+  line-height: 50px;
+  border: 3px solid #fff;
   border-radius: 5px;
-  transition: 1s;
+  transition: 0.5s;
   color: #fff;
+  margin: 20px;
+  font-size: large;
 }
 #close a {
   color: #fff;
@@ -53,6 +55,7 @@ header h2 {
 }
 #g_menu li {
   list-style: none;
+  margin: 10px;
 }
 #g_menu a {
   color: #fff;
@@ -62,9 +65,10 @@ header h2 {
   width: 300px;
   padding: 20px;
   background: rgba(0, 0, 0,.6);
-  transition: right 1s;
+  transition: right 0.5s;
   position: fixed;
   top: 0;
+  text-align: center;
 }
 .outside {
     right: -100%;

@@ -13,18 +13,21 @@
 
 <body class="container">
 
-    <header>
-        <div id="open" class="btn btn_g"><a href="#g_menu">三</a></div>
-          <div id="g_menu" class="outside">
-            <div id="close" class="btn btn_g"><a href="#">×</a></div>
-            <ul>
-              <li><a href="/timeKiller/playlist">マイプレイリスト</a></li>
-              <li><a href="/timeKiller/contact">お問い合わせ</a></li>
-              <li><a href="/timeKiller/developer">製作者情報</a></li>
-            </ul>
-          </div>
-        <h1 class="display-4"><%=title %></h1>
-        <h2 class="display-4"><%=name %>さんこんにちは！</h2>
+  <header>
+    <!-- ↓ここからハンバーガーメニュー -->
+    <div id="open" class="btn btn_g"><a href="#g_menu">三</a></div>
+    <div id="g_menu" class="outside">
+      <div id="close" class="btn btn_g"><a href="#">×</a></div>
+      <ul>
+        <li><a href="/timeKiller">トップページ</a></li>
+        <li><a href="/timeKiller/playlist">マイプレイリスト</a></li>
+        <li><a href="/timeKiller/contact">お問い合わせ</a></li>
+        <li><a href="/timeKiller/developer">製作者情報</a></li>
+      </ul>
+    </div>
+    <!-- ↑ここまでハンバーガーメニュー -->
+    <h1 class="display-4"><%=title %></h1>
+    <h2 class="display-4"><%=name %>さんこんにちは！</h2>
     </header>
     <div role="main">
       <div class="timeInp">
@@ -45,7 +48,7 @@
         </div>
     </footer>
 
-<!-- ハンバーガーメニュー -->
+<!-- ↓ここからハンバーガーメニューの操作 -->
 <script>
   const open = document.querySelector("#open");
   const close = document.querySelector("#close");
@@ -61,6 +64,7 @@
     g_menu.classList.add('outside');
   }, false);
 </script>
+<!-- ↑ここまでハンバーガーメニューの操作 -->
 
 </body>
 
