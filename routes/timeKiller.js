@@ -40,6 +40,16 @@ router.get('/', (req, res, next) => {
   })
 });
 
+// ルーレットページへのアクセス
+router.get('/roulette', (req, res, next) => {
+  if (loginCheck(req, res, next)) { return };
+  var data = {
+    title: 'たいむきらー',
+    content: "動画"
+  }
+  res.render('timeKiller/roulette', data);
+});
+
 // 開発者ページへのアクセス
 router.get('/developer', (req, res, next) => {
   if (loginCheck(req, res, next)) { return };
