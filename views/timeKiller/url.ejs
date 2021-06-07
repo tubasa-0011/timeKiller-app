@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="ja">
+
+<head>
+    <meta http-equiv="content-type" content="text/html;" charset="UTF-8">
+    <title>
+        <%=title %>
+    </title>
+    <!-- <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" crossorigin="anonymous"> -->
+    <link rel="stylesheet" href="/stylesheets/sanitize.css">
+    <link rel="stylesheet" href='/stylesheets/top.css' />
+    <link rel="preconnect" href="https://fonts.gstatic.com">
+    <link href="https://fonts.googleapis.com/css2?family=Hachi+Maru+Pop&display=swap" rel="stylesheet">
+</head>
+
+<body class="container">
+
+    <header>
+        <!-- ↓ここからハンバーガーメニュー -->
+        <div id="open" class="btn btn_g"><a href="#g_menu">三</a></div>
+        <div id="g_menu" class="outside">
+            <div id="close" class="btn btn_g"><a href="#">×</a></div>
+            <ul>
+                <li><a href="/timeKiller">トップページ</a></li>
+                <li><a href="/timeKiller/playlist">マイプレイリスト</a></li>
+                <li><a href="/timeKiller/contact">お問い合わせ</a></li>
+                <li><a href="/timeKiller/developer">製作者情報</a></li>
+            </ul>
+        </div>
+        <!-- ↑ここまでハンバーガーメニュー -->
+        <h1 class="display-4">
+            <%=title %>
+        </h1>
+    </header>
+ <main>
+    <p class="mt-4"><a href="<%- content %> ">&lt;&lt; この動画を見よう！！</a></p>
+ </main>
+    <footer>
+        <p class="mt-4"><a href="/timeKiller">&lt;&lt; Top へ戻る</a></p>
+    </footer>
+
+    <!-- ↓ここからハンバーガーメニューの操作 -->
+    <script>
+        const open = document.querySelector("#open");
+        const close = document.querySelector("#close");
+        const g_menu = document.querySelector("#g_menu");
+        //メニューを出す
+        open.addEventListener('click', function () {
+            g_menu.classList.add('inside');
+            g_menu.classList.remove('outside');
+        }, false);
+        //メニューを隠す
+        close.addEventListener('click', function () {
+            g_menu.classList.remove('inside');
+            g_menu.classList.add('outside');
+        }, false);
+    </script>
+    <!-- ↑ここまでハンバーガーメニューの操作 -->
+
+</body>
+
+</html>
