@@ -58,6 +58,16 @@ router.get('/developer', (req, res, next) => {
   res.render('timeKiller/developer', data);
 });
 
+// 写経ページへのアクセス
+router.get('/syakei', (req, res, next) => {
+  if (loginCheck(req, res, next)) { return };
+  var data = {
+    title: 'たいむきらー',
+    title2: 'しゃけー',
+  }
+  res.render('timeKiller/syakei', data);
+});
+
 //検索フォームの送信処理
 router.post('/', (req, res, next) => {
   if (loginCheck(req, res, next)) { return };
