@@ -1,0 +1,19 @@
+<% for(let pl=0; pl<c; pl++) {%>
+    <% if(val[pl].userId == val[pl].customPlaylist.userId) { %> 
+    <% if(val[pl].flag==1) { %>
+    <li class="menu">
+        <div class="form-group">
+            <input type="checkbox" name="<%= pl %>" checked class="checks">
+            <label for="<%= pl %>"><%= val[pl].customPlaylist.genreName %></label>
+        </div>
+    </li>
+    <% } else { %>
+    <li class="menu">
+        <div class="form-group">
+            <input type="checkbox" name="<%= pl %>" class="checks">
+            <label for="<%= pl %>"><%= val[pl].customPlaylist.genreName %></label>
+        </div>
+    </li>
+    <% } %> 
+    <% } %>
+<% } %>

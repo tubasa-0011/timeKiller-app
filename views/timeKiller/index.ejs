@@ -28,7 +28,7 @@
     <!-- ↑ここまでハンバーガーメニュー -->
     <h1 class="display-4"><%=title %></h1>
     <h2 class="display-4"><%=name %>さんこんにちは！</h2>
-    </header>
+  </header>
     <div role="main">
       <div class="timeInp">
         <label for="name">何分時間をつぶす？？：</label>
@@ -39,32 +39,32 @@
         <a href="/timeKiller/roulette" class="btn btn_start">ひまつぶしを始める</a>
       </div>
     </div>
-    <footer>
-        <h3>最新のプレイリスト</h3>
-        <p><%=namename %>さん</p>
-        <div class="ver">
-          <h4>バージョンアップ情報</h4>
-          <p>ver<%=ver %></p>
-        </div>
-    </footer>
+  <footer>
+    <h3>最新のプレイリスト</h3>
+    <p><%=namename %>さん</p>
+    <div class="ver">
+      <h4>バージョンアップ情報</h4>
+      <p>ver<%=ver %></p>
+    </div>
+  </footer>
 
-<!-- ↓ここからハンバーガーメニューの操作 -->
-<script>
-  const open = document.querySelector("#open");
-  const close = document.querySelector("#close");
-  const g_menu = document.querySelector("#g_menu");
-  //メニューを出す
-  open.addEventListener('click', function() {
-    g_menu.classList.add('inside');
-    g_menu.classList.remove('outside');
-  }, false);
-  //メニューを隠す
-  close.addEventListener('click', function() {
-    g_menu.classList.remove('inside');
-    g_menu.classList.add('outside');
-  }, false);
-</script>
-<!-- ↑ここまでハンバーガーメニューの操作 -->
+  <!-- ↓ここからハンバーガーメニューの操作 -->
+  <script>
+    const open = document.querySelector("#open");
+    const close = document.querySelector("#close");
+    const g_menu = document.querySelector("#g_menu");
+    //メニューを出す
+    open.addEventListener('click', function() {
+      g_menu.classList.add('inside');
+      g_menu.classList.remove('outside');
+    }, false);
+    //メニューを隠す
+    close.addEventListener('click', function() {
+      g_menu.classList.remove('inside');
+      g_menu.classList.add('outside');
+    }, false);
+  </script>
+  <!-- ↑ここまでハンバーガーメニューの操作 -->
 
 </body>
 
