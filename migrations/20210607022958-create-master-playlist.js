@@ -1,21 +1,18 @@
 'use strict';
 module.exports = {
   up: async (queryInterface, Sequelize) => {
-    await queryInterface.createTable('Markdata', {
+    await queryInterface.createTable('masterPlaylist', {
       id: {
         allowNull: false,
         autoIncrement: true,
         primaryKey: true,
         type: Sequelize.INTEGER
       },
-      userId: {
+      genreId: {
         type: Sequelize.INTEGER
       },
-      title: {
+      genreName: {
         type: Sequelize.STRING
-      },
-      content: {
-        type: Sequelize.TEXT
       },
       createdAt: {
         allowNull: false,
@@ -28,6 +25,6 @@ module.exports = {
     });
   },
   down: async (queryInterface, Sequelize) => {
-    await queryInterface.dropTable('Markdata');
+    await queryInterface.dropTable('masterPlaylist');
   }
 };

@@ -6,25 +6,105 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title><%=title %></title>
-    <!-- <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta1/dist/css/bootstrap.min.css" rel="stylesheet"
-        integrity="sha384-giJF6kkoqNQ00vy+HMDP7azOuL0xtbfIcaT9wjKHr8RbDVddVHyTfAAsrekwKmP1" crossorigin="anonymous"> -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta1/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-giJF6kkoqNQ00vy+HMDP7azOuL0xtbfIcaT9wjKHr8RbDVddVHyTfAAsrekwKmP1" crossorigin="anonymous">
         <link rel="stylesheet" href="/stylesheets/playlist.css">
 </head>
 
-<body class="container">
+<body>
     <header>
-        <h1 class="display-4"><%=title %></h1>
-    </header>
-    <div role="main">
-        <p><%=content %></p>
-        <ul class=”menu”>
-            <% var id=0; %>
-            <% for(var key in data) {%>
-            <%- include('playlistData_item',
-                {id:++id,key:key,val:[data[key]]}) %>
-            <% } %>
+        <!-- ↓ここからハンバーガーメニュー -->
+    <div id="open" class="btn_g"><a href="#g_menu">三</a></div>
+    <div id="g_menu" class="outside">
+        <div id="close" class="btn_g"><a href="#">×</a></div>
+        <ul>
+        <li><a href="/timeKiller">トップページ</a></li>
+        <li><a href="/timeKiller/playlist">マイプレイリスト</a></li>
+        <li><a href="/timeKiller/contact">お問い合わせ</a></li>
+        <li><a href="/timeKiller/developer">製作者情報</a></li>
         </ul>
     </div>
+    <!-- ↑ここまでハンバーガーメニュー -->
+    <h1 class="display-4"><%=title %></h1>
+    </header>
+    <div role="main" class="container">
+        <form action="/timeKiller/playlist" method="post">
+            <input id="checkAll" type="checkbox" name="lang" value="checkAll">
+            <label>全て選択</label>
+            <ul class=”menu”>
+            <%- include('masterPlaylistData_item',{val: pls}) %>
+            <%- include('customPlaylistData_item',{val: pls, c: count, c2: count2}) %>
+            </ul>
+            <input type="submit" value="適用" class="playlist-btn">
+        </form>
+        <br><br>
+        <form action="/timeKiller/playlistAdd" method="post">
+            <div class="form-group">
+                <label for="detail">新しい暇つぶし</label>
+                <input type="text" name="detail" class="form-control">
+            </div>
+            <br>
+            <input type="submit" value="作成" class="playlistAdd-btn">
+        </form>
+        <form action="/timeKiller/playlistOpen" method="post">
+            <input type="submit" value="プレイリストを公開" class="playlistOpen-btn">
+        </form>
+    </div>
+    <!-- ↓ここからハンバーガーメニューの操作 -->
+    <script>
+        const open = document.querySelector("#open");
+        const close = document.querySelector("#close");
+        const g_menu = document.querySelector("#g_menu");
+        //メニューを出す
+        open.addEventListener('click', function() {
+            g_menu.classList.add('inside');
+            g_menu.classList.remove('outside');
+        }, false);
+        //メニューを隠す
+        close.addEventListener('click', function() {
+            g_menu.classList.remove('inside');
+            g_menu.classList.add('outside');
+        }, false);
+    </script>
+    <!-- ↑ここまでハンバーガーメニューの操作 -->
+    <!-- ここから全選択・全解除 -->
+    <script>
+        //「全て選択」のチェックボックス
+        let checkAll = document.getElementById("checkAll");
+        //「全て選択」以外のチェックボックス
+        let el = document.getElementsByClassName("checks");
+        //全てのチェックボックスをON/OFFする
+        const funcCheckAll = (bool) => {
+            for (let i = 0; i < el.length; i++) {
+                el[i].checked = bool;
+            }
+        };
+        //「checks」のclassを持つ要素のチェック状態で「全て選択」のチェック状態をON/OFFする
+        const funcCheck = () => {
+            let count = 0;
+            for (let i = 0; i < el.length; i++) {
+                if (el[i].checked) {
+                    count += 1;
+                }
+            }
+            if (el.length === count) {
+                checkAll.checked = true;
+            } else {
+                checkAll.checked = false;
+            }
+        };
+        //「全て選択」のチェックボックスをクリックした時
+        checkAll.addEventListener("click", () => {
+            funcCheckAll(checkAll.checked);
+        },
+        false
+        );
+        //「全て選択」以外のチェックボックスをクリックした時
+        for (let i = 0; i < el.length; i++) {
+            el[i].addEventListener("click", funcCheck, false);
+        }
+    </script>
+    <!-- ここまで全選択・全解除 -->
 </body>
 
 </html>

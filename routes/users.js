@@ -19,10 +19,11 @@ router.get('/', (req, res, next) => {
 router.get('/add', (req, res, next) => {
   var data = {
     title: 'Users/Add',
+    content:"",
     form: new db.User(),
     err: null
   }
-  res.render('users/add', data);
+  res.render('users/login', data);
 });
 
 router.post('/add', (req, res, next) => {
@@ -30,7 +31,6 @@ router.post('/add', (req, res, next) => {
     name: req.body.name,
     pass: req.body.pass,
     mail: req.body.mail,
-    age: req.body.age
   };
   db.sequelize.sync()
     .then(() => db.User.create(form)
@@ -43,7 +43,7 @@ router.post('/add', (req, res, next) => {
           form: form,
           err: err
         }
-        res.render('users/add', data);
+        res.render('users/login', data);
       })
     )
 });

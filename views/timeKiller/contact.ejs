@@ -14,6 +14,18 @@
 
 <body>
   <header>
+    <!-- ↓ここからハンバーガーメニュー -->
+    <div id="open" class="btn_g"><a href="#g_menu">三</a></div>
+    <div id="g_menu" class="outside">
+      <div id="close" class="btn_g"><a href="#">×</a></div>
+      <ul>
+        <li><a href="/timeKiller">トップページ</a></li>
+        <li><a href="/timeKiller/playlist">マイプレイリスト</a></li>
+        <li><a href="/timeKiller/contact">お問い合わせ</a></li>
+        <li><a href="/timeKiller/developer">製作者情報</a></li>
+      </ul>
+    </div>
+    <!-- ↑ここまでハンバーガーメニュー -->
     <h1><%= title %></h1>
   </header>
   <div class="container" role="main">
@@ -33,7 +45,23 @@
       </div>
       <input type="submit" value="送信" class="contact-btn">
     </form>
-    <p class="mt-4"><a href="/timeKiller">&lt;&lt; Top へ戻る</a></p>
   </div>
+  <!-- ↓ここからハンバーガーメニューの操作 -->
+  <script>
+    const open = document.querySelector("#open");
+    const close = document.querySelector("#close");
+    const g_menu = document.querySelector("#g_menu");
+    //メニューを出す
+    open.addEventListener('click', function() {
+      g_menu.classList.add('inside');
+      g_menu.classList.remove('outside');
+    }, false);
+    //メニューを隠す
+    close.addEventListener('click', function() {
+      g_menu.classList.remove('inside');
+      g_menu.classList.add('outside');
+    }, false);
+  </script>
+  <!-- ↑ここまでハンバーガーメニューの操作 -->
 </body>
 </html>

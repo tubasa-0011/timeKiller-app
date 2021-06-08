@@ -23,21 +23,13 @@ function loginCheck(req, res) {
 // トップページへのアクセス
 router.get('/', (req, res, next) => {
   if (loginCheck(req, res, next)) { return };
-  db.Markdata.findAll({
-    where: { userId: req.session.login.id },
-    limit: pNum,
-    order: [
-      ['createdAt', 'DESC']
-    ]
-  }).then(mds => {
-    var data = {
-      title: 'たいむきらー',
-      name: 'name',
-      namename: 'さとう',
-      ver: 2.0
-    }
-    res.render('timeKiller/index', data);
-  })
+  var data = {
+    title: 'たいむきらー',
+    name: 'name',
+    namename: 'さとう',
+    ver: 2.0
+  }
+  res.render('timeKiller/index', data);
 });
 
 // ルーレットページへのアクセス
@@ -99,59 +91,60 @@ router.post('/', (req, res, next) => {
   })
 });
 
-// //新規作成ページ
-// router.get('/add', (req, res, next) => {
-//   if (check(req, res, next)) { return };
-//   res.render('timeKiller/add', { title: 'timeKiller/Add' });
-// });
-
-// //新規作成フォームの送信処理
-// router.post('/add', (req, res, next) => {
-//   if (check(req, res, next)) { return };
-//   db.sequelize.sync().then(() => db.Markdata.create({
-//       userId: req.session.login.id,
-//       title: req.body.title,
-//       content: req.body.content,
-//     })
-//       .then(model => {
-//         res.redirect('/timeKiller');
-//       })
-//     );
-// });
-
-//プレイリスト用データ
-let playlistData = {
-  'check01': ['動画リンク','音楽リンク'],
-  'check02': ['音楽リンク'],
-  'check03': ['本（青空文庫）リンク'],
-  'check04': ['ウェブラジオリンク'],
-  'check05': ['ニュースリンク'],
-  'check06': ['SNSリンク'],
-  'check07': ['まとめサイトリンク'],
-  'check08': ['ウィキランダムリンク'],
-  'check09': ['なぞなぞ・クイズリンク'],
-  'check10': ['心理テストリンク'],
-  'check11': ['ゲーム（ボードゲーム）リンク'],
-  'check12': ['名言集（ランダムでサイト提示）リンク'],
-  'check13': ['名言作成 リンク'],
-};
-
 //プレイリストページ
 router.get('/playlist', (req, res, next) => {
-  var msg = "これはotherページです。"
-    var data = {
+  if (loginCheck(req, res, next)) { return };
+  var count = 0;
+  db.customPlaylist.findAll().then(cPls => {
+    count = Object(cPls).length;
+  });
+  db.MyPlaylist.findAll({
+    include: [
+      { model: db.masterPlaylist },
+      { model: db.customPlaylist },
+    ],
+    where: { 
+      userId: req.session.login.id,
+    },
+  }).then(pls => {
+    count2 = Object(pls).length;
+      var data = {
         title: "Other",
-        content: msg,
-        data: playlistData,
-        filename: 'data_item'
-    }
-    res.render('timeKiller/playlist', data);
+        pls: pls,
+        count: count,
+        count2: count2,
+      }
+      res.render('timeKiller/playlist', data);
+  });
 });
 
 //プレイリストフォームの送信処理
 router.post('/playlist', (req, res, next) => {
   if (check(req, res, next)) { return }
-  redirect('/timeKiller')
+  redirect('/timeKiller');
+});
+
+//新規プレイリスト追加の送信処理
+router.post('/playlistAdd', (req, res, next) => {
+  if (loginCheck(req, res, next)) { return }
+  var count = 0;
+  db.customPlaylist.findAll().then(cPls => {
+    count = Object(cPls).length;
+    console.log(count);
+  });
+  db.sequelize.sync()
+      .then(() => db.customPlaylist.create({
+      userId: req.session.login.id,
+      genreId: 101 + count,
+      genreName: req.body.detail,
+    })
+      .then(brd => {
+        res.redirect('/timeKiller/playlist');
+      })
+      .catch((err)=>{
+        res.redirect('/timeKiller/playlist');
+      })
+    )
 });
 
 //お問い合わせページ
