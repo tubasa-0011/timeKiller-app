@@ -146,6 +146,9 @@ footer h4 {
 footer p {
   margin: 0;
 }
+footer a {
+  color: #fff;
+}
 .ver {
   position: absolute;
   bottom: 10px;

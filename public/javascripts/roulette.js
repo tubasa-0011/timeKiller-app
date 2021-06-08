@@ -43,7 +43,7 @@ function draw() {
   circle(0, 0, 100);
   fill("#fff");
   triangle(-15,-200, 0,-185, 15,-200);
-  resetMatrix(); // 初期化
+  resetMatrix(); //初期化
 
   //回転
   strokeWeight(1);
@@ -61,7 +61,7 @@ function draw() {
   rectMode(CENTER);
   rect(0, 0, 150, 15);
   rect(0, 0, 15, 150);
-  resetMatrix(); // 初期化
+  resetMatrix(); //初期化
 
   //ひまつぶし内容
     if(speed>15){
