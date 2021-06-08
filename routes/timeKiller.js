@@ -255,4 +255,22 @@ function makePage(req, res, model, flg) {
   res.render('timeKiller/mark', data);
 }
 
+//URL表示ページ
+router.get('/url', (req, res, next) => {
+  if (loginCheck(req, res, next)) { return };
+  db.Markdata.findAll({
+    where: { userId: req.session.login.id },
+    limit: pNum,
+    order: [
+      ['createdAt', 'DESC']
+    ]
+  }).then(mds => {
+    var data = {
+      title: '動画で暇つぶし',
+      content: "https://www.youtube.com/watch?v=7WZ1Kt3zraY",
+    }
+    res.render('timeKiller/url', data);
+  })
+});
+
 module.exports = router;
