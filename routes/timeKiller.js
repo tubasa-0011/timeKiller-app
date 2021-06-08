@@ -94,10 +94,9 @@ router.post('/', (req, res, next) => {
 //プレイリストページ
 router.get('/playlist', (req, res, next) => {
   if (loginCheck(req, res, next)) { return };
-  var cPls;
+  var count = 0;
   db.customPlaylist.findAll().then(cPls => {
     count = Object(cPls).length;
-    console.log(count);
   });
   db.MyPlaylist.findAll({
     include: [
@@ -109,7 +108,6 @@ router.get('/playlist', (req, res, next) => {
     },
   }).then(pls => {
     count2 = Object(pls).length;
-    console.log(pls);
       var data = {
         title: "Other",
         pls: pls,
