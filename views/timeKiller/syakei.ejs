@@ -1,0 +1,180 @@
+<!DOCTYPE html>
+<html lang="ja">
+    
+<head>
+    <meta http-equiv="content-type" content="text/html;" charset="UTF-8">
+    <title><%=title %></title>
+    <!-- <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" crossorigin="anonymous"> -->
+    <link rel="stylesheet" href="/stylesheets/sanitize.css">
+    <link rel="stylesheet" href='/stylesheets/top.css' />
+    <link rel="preconnect" href="https://fonts.gstatic.com">
+    <link href="https://fonts.googleapis.com/css2?family=Hachi+Maru+Pop&display=swap" rel="stylesheet"> 
+</head>
+
+<body class="container">
+
+  <header>
+    <!-- ↓ここからハンバーガーメニュー -->
+    <div id="open" class="btn btn_g"><a href="#g_menu">三</a></div>
+    <div id="g_menu" class="outside">
+      <div id="close" class="btn btn_g"><a href="#">×</a></div>
+      <ul>
+        <li><a href="/timeKiller">トップページ</a></li>
+        <li><a href="/timeKiller/playlist">マイプレイリスト</a></li>
+        <li><a href="/timeKiller/contact">お問い合わせ</a></li>
+        <li><a href="/timeKiller/developer">製作者情報</a></li>
+      </ul>
+    </div>
+    <!-- ↑ここまでハンバーガーメニュー -->
+
+    <h1 class="display-4"><%=title %></h1>
+    <h2 class="display-4"><%=title2 %></h2>
+    </header>
+
+    <div role="main">
+      <div class="typing-wrapper">
+        <div class="typing">
+          <p id="target">画面をクリックしてスタート！</p>
+        </div>
+        <div class="info-wrapper">
+          <p class="info">
+            Letter count: <span id="score">0</span>
+            Miss count: <span id="miss">0</span>
+          </p>
+        </div>
+      </div>
+    </div>
+
+    <footer>
+      <p class="mt-4"><a href="/timeKiller">&lt;&lt; Top へ戻る</a></p>
+    </footer>
+
+<!-- ↓ここからハンバーガーメニューの操作 -->
+<script>
+  const open = document.querySelector("#open");
+  const close = document.querySelector("#close");
+  const g_menu = document.querySelector("#g_menu");
+  //メニューを出す
+  open.addEventListener('click', function() {
+    g_menu.classList.add('inside');
+    g_menu.classList.remove('outside');
+  }, false);
+  //メニューを隠す
+  close.addEventListener('click', function() {
+    g_menu.classList.remove('inside');
+    g_menu.classList.add('outside');
+  }, false);
+</script>
+<!-- ↑ここまでハンバーガーメニューの操作 -->
+
+<!-- しゃけー -->
+<script>
+  const words = [
+    'akirametarasokodesiaisyuuryoudesuyo',
+    'kuririnnnokotoka',
+    'kanehainochiyoriomoi',
+    'kuchikusiteyaru',
+    'bokuhasinnsekainokamininaru',
+    'damarekozou',
+    'oyajinimobutaretakotonainoni',
+    'wagajinnseiniippennnokuinasi',
+    'dagakotowaru',
+    'mirohitogagominoyouda',
+    'yatuhatonndemonaimonowonusunndeikimasitaanatanokokorodesu',
+    'pokemongettodaze',
+    'kaoganuretechikaragadenai',
+    'jicchannnonanikakete',
+    'oyakatasorakaraonnnanokoga',
+    'amarituyoikotobawotukaunayoyowakumieruzo',
+    'omaenomonohaorenomono',
+    'tukinikawatteosiokiyo'
+  ];
+  let word;
+  let loc;
+  let score;
+  let miss;
+  const timeLimit = 3 * 1000;
+  let startTime;
+  let isPlaying = false;
+
+  const target = document.getElementById('target');
+  const scoreLabel = document.getElementById('score');
+  const missLabel = document.getElementById('miss');
+  const timerLabel = document.getElementById('timer');
+
+  function updateTarget() {
+    let placeholder = '';
+    for (let i = 0; i < loc; i++) {
+      placeholder += '_';
+    }
+    target.textContent = placeholder + word.substring(loc);
+  }
+
+  function updateTimer() {
+    const timeLeft = startTime + timeLimit - Date.now();
+    timerLabel.textContent = (timeLeft / 1000).toFixed(2);
+
+    const timeoutId = setTimeout(() => {
+      updateTimer();
+    }, 10);
+
+    if (timeLeft < 0) {
+      isPlaying = false;
+
+      clearTimeout(timeoutId);
+      timerLabel.textContent = '0.00';
+      setTimeout(() => {
+        showResult();
+      }, 100);
+
+      target.textContent = 'click to replay';
+    }
+  }
+
+  function showResult() {
+    const accuracy = score + miss === 0 ? 0 : score / (score + miss) * 100;
+    alert(`${score} letters, ${miss} misses, ${accuracy.toFixed(2)}% accuracy!`);
+  }
+
+  window.addEventListener('click', () => {
+    if (isPlaying === true) {
+      return;
+    }
+    isPlaying = true;
+
+    loc = 0;
+    score = 0;
+    miss = 0;
+    scoreLabel.textContent = score;
+    missLabel.textContent = miss;
+    word = words[Math.floor(Math.random() * words.length)];
+
+    target.textContent = word;
+    startTime = Date.now();
+    updateTimer();
+  });
+
+  window.addEventListener('keydown', e => {
+    if (isPlaying !== true) {
+      return;
+    }
+
+    if (e.key === word[loc]) {
+      loc++;
+      if (loc === word.length) {
+        word = words[Math.floor(Math.random() * words.length)];
+        loc = 0;
+      }
+      updateTarget();
+      score++;
+      scoreLabel.textContent = score;
+    } else {
+      miss++;
+      missLabel.textContent = miss;
+    }
+  });
+</script>
+
+</body>
+
+</html>
