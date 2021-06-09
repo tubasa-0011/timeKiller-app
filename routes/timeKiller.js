@@ -118,13 +118,13 @@ router.get('/playlist', (req, res, next) => {
     },
   }).then(pls => {
     for(let pl of pls){
-      console.log( pl.customPlaylist );
+      console.log( pl );
     }
       var data = {
         title: "Other",
         pls: pls,
         mc: mc,
-        cc: cc+mc+1,
+        cc: cc+mc,
       }
       res.render('timeKiller/playlist', data);
   });
@@ -133,6 +133,7 @@ router.get('/playlist', (req, res, next) => {
 //プレイリストフォームの送信処理
 router.post('/playlist', (req, res, next) => {
   if (check(req, res, next)) { return }
+  console.log(req.body);
   redirect('/timeKiller');
 });
 

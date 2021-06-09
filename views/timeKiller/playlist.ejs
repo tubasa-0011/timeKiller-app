@@ -31,8 +31,10 @@
         <form action="/timeKiller/playlist" method="post">
             <input id="checkAll" type="checkbox" name="lang" value="checkAll">
             <label>全て選択</label>
-            <ul class=”menu”>
+            <ul>
             <%- include('masterPlaylistData_item',{val: pls, mc: mc}) %>
+            </ul>
+            <ul>
             <%- include('customPlaylistData_item',{val: pls, mc: mc, cc: cc}) %>
             </ul>
             <input type="submit" value="適用" class="playlist-btn">

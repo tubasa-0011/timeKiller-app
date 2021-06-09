@@ -16,7 +16,7 @@ module.exports = (sequelize, DataTypes) => {
         foreignKey: 'genreId',
         sourceKey: 'genreId'
       });
-      MyPlaylist.hasOne(models.customPlaylist, {
+      MyPlaylist.hasMany(models.customPlaylist, {
         foreignKey: 'genreId',
         sourceKey: 'genreId'
       });
