@@ -28,13 +28,12 @@
     <!-- ↑ここまでハンバーガーメニュー -->
 
     <h1 class="display-4"><%=title %></h1>
-    <h2 class="display-4"><%=title2 %></h2>
     </header>
 
     <div role="main">
       <div class="typing-wrapper">
         <div class="typing">
-          <p id="target">画面をクリックしてスタート！</p>
+          <p id="target">スペースキーを押してスタート！</p>
         </div>
         <div class="info-wrapper">
           <p class="info">
@@ -159,22 +158,24 @@
     alert(`${score} letters, ${miss} misses, ${accuracy.toFixed(2)}% accuracy!`);
   }
 
-  window.addEventListener('click', () => {
-    if (isPlaying === true) {
-      return;
+  window.addEventListener('keydown', () => {
+    if(event.keyCode === 32) {
+      if (isPlaying === true) {
+        return;
+      }
+      isPlaying = true;
+
+      loc = 0;
+      score = 0;
+      miss = 0;
+      scoreLabel.textContent = score;
+      missLabel.textContent = miss;
+      word = words[Math.floor(Math.random() * words.length)];
+
+      target.textContent = word;
+      startTime = Date.now();
+      updateTimer();
     }
-    isPlaying = true;
-
-    loc = 0;
-    score = 0;
-    miss = 0;
-    scoreLabel.textContent = score;
-    missLabel.textContent = miss;
-    word = words[Math.floor(Math.random() * words.length)];
-
-    target.textContent = word;
-    startTime = Date.now();
-    updateTimer();
   });
 
   window.addEventListener('keydown', e => {

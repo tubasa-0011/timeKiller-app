@@ -19,20 +19,14 @@ header {
   position: relative;
 }
 header h1 {
-  margin: 0;
+  margin: 40px 0;
   font-size: 40px;
   letter-spacing: 8px;
   position: absolute;
   top: 10px;
   width: 100%;
 }
-header h2 {
-  margin: 0;
-  font-size: 30px;
-  position: absolute;
-  top: 80px;
-  width: 100%;
-}
+
 
 /* ハンバーガー */
 .btn_g {
@@ -43,6 +37,7 @@ header h2 {
 .btn_g a {
   display: inline-block;
   text-align: center;
+  text-decoration: none;
 }
 #open a {
   background: transparent;
@@ -56,6 +51,7 @@ header h2 {
   font-size: large;
   position: relative;
   z-index: 10;
+  text-decoration: none;
 }
 #close a {
   color: #fff;
@@ -63,6 +59,12 @@ header h2 {
   width: 30px;
   line-height: 30px;
   border-radius: 15px;
+  text-decoration: none;
+}
+.btn_g:active {
+  position: relative;
+  top: 5px;
+  right: 0px;
 }
 #g_menu li {
   list-style: none;
@@ -70,6 +72,7 @@ header h2 {
 }
 #g_menu a {
   color: #fff;
+  text-decoration: none;
 }
 #g_menu {
   height: 100%;
@@ -123,7 +126,7 @@ input {
   cursor: pointer;
   box-shadow: 0 7px #a0a0a0;
 }
-.btn:active {
+.btn_start:active {
   box-shadow: none;
   position: relative;
   top: 7px;

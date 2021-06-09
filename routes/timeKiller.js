@@ -24,10 +24,9 @@ function loginCheck(req, res) {
 router.get('/', (req, res, next) => {
   if (loginCheck(req, res, next)) { return };
   var data = {
-    title: 'たいむきらー',
-    name: 'name',
-    namename: 'さとう',
-    ver: 2.0
+    title: req.session.login.name,
+    plName: 'さとう',
+    ver: 0.2
   }
   res.render('timeKiller/index', data);
 });
@@ -46,8 +45,7 @@ router.get('/roulette', (req, res, next) => {
 router.get('/developer', (req, res, next) => {
   if (loginCheck(req, res, next)) { return };
   var data = {
-    title: 'たいむきらー',
-    title2: 'せーさくしゃじょーほー',
+    title: 'せーさくしゃじょーほー',
     tanakaName: '田中 翼',
     tanakaText: 'ほげほげ',
     nakamuraName: '中村 航生',
@@ -59,13 +57,12 @@ router.get('/developer', (req, res, next) => {
 });
 
 // 写経ページへのアクセス
-router.get('/syakei', (req, res, next) => {
+router.get('/syakyo', (req, res, next) => {
   if (loginCheck(req, res, next)) { return };
   var data = {
-    title: 'たいむきらー',
-    title2: 'しゃけー',
+    title: 'しゃきょー',
   }
-  res.render('timeKiller/syakei', data);
+  res.render('timeKiller/syakyo', data);
 });
 
 //検索フォームの送信処理

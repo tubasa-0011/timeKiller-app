@@ -12,6 +12,7 @@ header {
   text-align: center;
   margin: 0;
   padding: 0;
+  position: relative;
 }
 
 header h1 {
@@ -20,6 +21,9 @@ header h1 {
   color: white;
   margin: 0;
   padding: 0;
+  position: absolute;
+  top: 10px;
+  width: 100%;
 }
 
 label{
@@ -54,14 +58,13 @@ label{
 /* ハンバーガー */
 .btn_g {
   text-align: right;
+  top: 10px;
+  right: 10px;
 }
 .btn_g a {
   display: inline-block;
   text-align: center;
-}
-.btn_g:active {
-  position: relative;
-  top: 7px;
+  text-decoration: none;
 }
 #open a {
   background: transparent;
@@ -73,6 +76,9 @@ label{
   color: #fff;
   margin: 20px;
   font-size: large;
+  position: relative;
+  z-index: 10;
+  text-decoration: none;
 }
 #close a {
   color: #fff;
@@ -80,6 +86,12 @@ label{
   width: 30px;
   line-height: 30px;
   border-radius: 15px;
+  text-decoration: none;
+}
+.btn_g:active {
+  position: relative;
+  top: 5px;
+  right: 0px;
 }
 #g_menu li {
   list-style: none;
@@ -87,6 +99,7 @@ label{
 }
 #g_menu a {
   color: #fff;
+  text-decoration: none;
 }
 #g_menu {
   height: 100%;
@@ -97,6 +110,7 @@ label{
   position: fixed;
   top: 0;
   text-align: center;
+  z-index: 10;
 }
 .outside {
     right: -100%;
