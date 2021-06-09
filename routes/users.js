@@ -25,7 +25,7 @@ router.get('/add', (req, res, next) => {
   }
   res.render('users/login', data);
 });
-
+ 
 router.post('/add', (req, res, next) => {
   const form = {
     name: req.body.name,
@@ -35,11 +35,11 @@ router.post('/add', (req, res, next) => {
   db.sequelize.sync()
     .then(() => db.User.create(form)
       .then(usr => {
-        res.redirect('/users');
+        res.redirect('/users/login');
       })
       .catch(err => {
         var data = {
-          title: 'Users/Add',
+          title: 'Users/login',
           form: form,
           err: err
         }
@@ -95,7 +95,9 @@ router.post('/delete', (req, res, next) => {
 router.get('/login', (req, res, next) => {
   var data = {
     title: 'Users/Login',
-    content:""
+    content:"",
+    form: new db.User(),
+    err: null
   }
   res.render('users/login', data);
 });

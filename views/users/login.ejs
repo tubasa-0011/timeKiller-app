@@ -18,9 +18,9 @@
         <div class="signup nodisplay">
           <h1>register</h1>
           <form autocomplete="off"action="/users/add" method="post">
-            <input type="text" placeholder="username">
-            <input type="email" placeholder="email">
-            <input type="password" placeholder="password">
+            <input type="text" placeholder="username" name="name">
+            <input type="email" placeholder="email" name="mail">
+            <input type="password" placeholder="password" name="pass">
             <input type="password" placeholder="confirm password">
             <button class="button submit">create account </button>
           </form>
@@ -29,10 +29,10 @@
           <h1>sign in</h1>
           <h3><%- content %> </h3>
           <form class="more-padding" autocomplete="off"action="/users/login" method="post">
-            <input type="text" placeholder="username"name="name" id="name" class="form-control">
-            <input type="password" placeholder="password"name="pass" id="pass" class="form-control">
+            <input type="text" placeholder="username"name="name" id="name">
+            <input type="password" placeholder="password"name="pass" id="pass">
             <div class="checkbox">
-              <input type="checkbox" id="gest" /><label for="gest login">gest login</label>
+              <label><input type="checkbox" id="guest" >guest login</label>
             </div>
             <button class="button submit">login</button>
           </form>
@@ -75,9 +75,18 @@
     pink.classList.remove('pinkbox');
     signin2[0].classList.add('nodisplay');
     signup2[0].classList.remove('nodisplay');
-    console.log(signin)
-    console.log(signup)
   }, false);
+
+  var guest=document.getElementById("guest");
+  guest.addEventListener("click", function (event) {
+    if (guest.checked) {
+      document.getElementById("name").value="guest";
+      document.getElementById("pass").value="guest01";
+    } else {
+      document.getElementById("name").value="";
+      document.getElementById("pass").value="";
+    }
+  },false);
 </script>
 
 </html>
