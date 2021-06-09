@@ -94,9 +94,19 @@ router.post('/', (req, res, next) => {
 //プレイリストページ
 router.get('/playlist', (req, res, next) => {
   if (loginCheck(req, res, next)) { return };
-  var count = 0;
-  db.customPlaylist.findAll().then(cPls => {
-    count = Object(cPls).length;
+  var mc = 0, cc = 0;
+  db.masterPlaylist.findAll().then(mPls => {
+    mc = Object(mPls).length;
+    console.log(mc)
+  });
+  db.customPlaylist.findAll({
+      where: { 
+        userId: req.session.login.id,
+      },
+    }
+  ).then(cPls => {
+    cc = Object(cPls).length;
+    console.log(cc)
   });
   db.MyPlaylist.findAll({
     include: [
@@ -107,12 +117,11 @@ router.get('/playlist', (req, res, next) => {
       userId: req.session.login.id,
     },
   }).then(pls => {
-    count2 = Object(pls).length;
       var data = {
         title: "Other",
         pls: pls,
-        count: count,
-        count2: count2,
+        mc: mc,
+        cc: cc+mc,
       }
       res.render('timeKiller/playlist', data);
   });
@@ -127,16 +136,20 @@ router.post('/playlist', (req, res, next) => {
 //新規プレイリスト追加の送信処理
 router.post('/playlistAdd', (req, res, next) => {
   if (loginCheck(req, res, next)) { return }
-  var count = 0;
-  db.customPlaylist.findAll().then(cPls => {
-    count = Object(cPls).length;
-    console.log(count);
+  var cc = 0;
+  db.customPlaylist.findAll({
+    where: { 
+      userId: req.session.login.id,
+    },
+  }).then(cPls => {
+  cc = Object(cPls).length;
+  console.log(cc)
   });
   db.sequelize.sync()
-      .then(() => db.customPlaylist.create({
+      .then(() => db.MyPlaylist.create({
       userId: req.session.login.id,
-      genreId: 101 + count,
-      genreName: req.body.detail,
+      genreId: 101 + cc,
+      flag: true,
     })
       .then(brd => {
         res.redirect('/timeKiller/playlist');

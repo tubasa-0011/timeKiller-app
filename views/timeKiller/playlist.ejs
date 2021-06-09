@@ -32,8 +32,8 @@
             <input id="checkAll" type="checkbox" name="lang" value="checkAll">
             <label>全て選択</label>
             <ul class=”menu”>
-            <%- include('masterPlaylistData_item',{val: pls}) %>
-            <%- include('customPlaylistData_item',{val: pls, c: count, c2: count2}) %>
+            <%- include('masterPlaylistData_item',{val: pls, mc: mc}) %>
+            <%- include('customPlaylistData_item',{val: pls, mc: mc, cc: cc}) %>
             </ul>
             <input type="submit" value="適用" class="playlist-btn">
         </form>
