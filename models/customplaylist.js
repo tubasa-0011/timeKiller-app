@@ -12,7 +12,7 @@ module.exports = (sequelize, DataTypes) => {
     static associate(models) {
       // define association here
       customPlaylist.belongsTo(models.User);
-      customPlaylist.hasMany(models.MyPlaylist, {
+      customPlaylist.belongsTo(models.MyPlaylist, {
         foreignKey: 'genreId',
         sourceKey: 'genreId',
       });

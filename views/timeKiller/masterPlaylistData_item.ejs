@@ -3,14 +3,14 @@
     <li class="menu">
         <div class="form-group">
             <input type="checkbox" name="<%= pl %>" checked class="checks">
-            <label for="<%= pl %>"><%= val[pl].masterPlaylists[0].genreName %></label>
+            <label for="<%= pl %>"><%= val[pl].masterPlaylist.genreName %></label>
         </div>
     </li>
     <% } else { %>
     <li class="menu">
         <div class="form-group">
             <input type="checkbox" name="<%= pl %>" class="checks">
-            <label for="<%= pl %>"><%= val[pl].masterPlaylists[0].genreName %></label>
+            <label for="<%= pl %>"><%= val[pl].masterPlaylist.genreName %></label>
         </div>
     </li>
     <% } %>

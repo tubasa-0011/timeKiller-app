@@ -117,11 +117,14 @@ router.get('/playlist', (req, res, next) => {
       userId: req.session.login.id,
     },
   }).then(pls => {
+    for(let pl of pls){
+      console.log( pl.customPlaylist );
+    }
       var data = {
         title: "Other",
         pls: pls,
         mc: mc,
-        cc: cc+mc,
+        cc: cc+mc+1,
       }
       res.render('timeKiller/playlist', data);
   });
@@ -145,8 +148,16 @@ router.post('/playlistAdd', (req, res, next) => {
   cc = Object(cPls).length;
   console.log(cc)
   });
-  db.sequelize.sync()
-      .then(() => db.MyPlaylist.create({
+  db.sequelize.sync().then(() => db.customPlaylist.create({
+    userId: req.session.login.id,
+    genreId: 101 + cc,
+    genreName: req.body.detail,
+  })
+  .catch((err)=>{
+    res.redirect('/timeKiller/playlist');
+  })
+  )
+  db.sequelize.sync().then(() => db.MyPlaylist.create({
       userId: req.session.login.id,
       genreId: 101 + cc,
       flag: true,
