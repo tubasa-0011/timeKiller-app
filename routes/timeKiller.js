@@ -230,19 +230,28 @@ router.post('/contact', [
 //URL表示ページ
 router.get('/url', (req, res, next) => {
   if (loginCheck(req, res, next)) { return };
-  db.Markdata.findAll({
-    where: { userId: req.session.login.id },
-    limit: pNum,
-    order: [
-      ['createdAt', 'DESC']
-    ]
-  }).then(mds => {
-    var data = {
-      title: '動画で暇つぶし',
-      content: "https://www.youtube.com/watch?v=7WZ1Kt3zraY",
-    }
-    res.render('timeKiller/url', data);
-  })
+  var list=[
+    ["動画","https://www.youtube.com/watch?v=7WZ1Kt3zraY"],
+    ["音楽","https://www.youtube.com/channel/UC-9-kyTW8ZkZNDHQJ6FgpwQ?hl=ja"],
+    ["本", "https://www.aozora.gr.jp/"],
+    ["ウェブラジオ","https://www.onsen.ag/"],
+    ["ニュース","https://news.google.co.jp/"],
+    ["SNS","http://www.twtimez.net/"],
+    ["まとめサイト","http://matome-plus.com/"],
+    ["ウィキランダム","http://ja.wikipedia.org/wiki/Special:Randompage"],
+    ["なぞなぞ・クイズ","http://nazo-nazo.com/sp/cat398/post-64.html"],
+    ["ミニゲーム","https://www.google.com/search?q=%E3%83%91%E3%83%83%E3%82%AF%E3%83%9E%E3%83%B3%E3%82%92%E3%83%97%E3%83%AC%E3%82%A4&biw=2560&bih=1368&ei=UMDBYOvwA4uUr7wPw66O2AE&oq=%E3%83%91%E3%83%83%E3%82%AF%E3%83%9E%E3%83%B3&gs_lcp=Cgdnd3Mtd2l6EAMyBAgAEEMyAggAMg4IABCxAxCDARCxAxCDATIKCAAQsQMQsQMQQzICCAAyBAgAEEMyAggAMgQIABBDOgkIABCwAxAIEB46CAgAEAgQDRAeOgoIABCxAxCDARAEOggIABCxAxCDAToHCAAQsQMQBDoECAAQBFD-KFjOSGCrSmgCcAB4AoABggKIAfEUkgEGMTguNy4xmAEAoAEBqgEHZ3dzLXdperABAMgBA8ABAQ&sclient=gws-wiz&ved=0ahUKEwjr2NbFxozxAhULyosBHUOXAxsQ4dUDCA4&uact=5&stick=H4sIAAAAAAAAAOOwfcQozi3w8sc9YSm-SWtOXmPk4GILSEzOTczjAQBYtGz7HAAAAA"],
+    ["心理テスト","https://uranaitv.jp/content/senjutsu/psychology"],
+    ["名言作成","https://meigen.makingmethod.com/"],
+    ["写経","timeKiller/syakyo"]
+  ];
+  var n=Math.floor( Math.random() * 12 ) ;
+  var data = {
+    title: list[n][0],
+    content: list[n][1],
+    ver: 2.0
+  }
+  res.render('timeKiller/url', data);
 });
 
 module.exports = router;
