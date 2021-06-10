@@ -47,7 +47,7 @@ router.get('/developer', (req, res, next) => {
     title: 'たいむきらー',
     title2: 'せーさくしゃじょーほー',
     tanakaName: '田中 翼',
-    tanakaText: 'ほげほげ',
+    tanakaText: '神奈川大学卒業。2021年4月に株式会社クオーレに入社。プログラム歴2年（2021年6月現在）。趣味はゲーム、アニメ、テニス',
     nakamuraName: '中村 航生',
     nakamuraText: 'ほほげげ',
     satoName: '佐藤 翔大',
