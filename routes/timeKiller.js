@@ -60,8 +60,7 @@ router.get('/developer', (req, res, next) => {
 router.get('/syakyo', (req, res, next) => {
   if (loginCheck(req, res, next)) { return };
   var data = {
-    title: 'たいむきらー',
-    title2: 'しゃけー',
+    title: 'しゃきょー',
   }
   res.render('timeKiller/syakyo', data);
 });
