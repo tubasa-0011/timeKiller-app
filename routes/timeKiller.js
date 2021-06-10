@@ -59,13 +59,13 @@ router.get('/developer', (req, res, next) => {
 });
 
 // 写経ページへのアクセス
-router.get('/syakei', (req, res, next) => {
+router.get('/syakyo', (req, res, next) => {
   if (loginCheck(req, res, next)) { return };
   var data = {
     title: 'たいむきらー',
     title2: 'しゃけー',
   }
-  res.render('timeKiller/syakei', data);
+  res.render('timeKiller/syakyo', data);
 });
 
 //検索フォームの送信処理
