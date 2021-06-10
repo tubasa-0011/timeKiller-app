@@ -44,8 +44,7 @@ router.get('/roulette', (req, res, next) => {
 router.get('/developer', (req, res, next) => {
   if (loginCheck(req, res, next)) { return };
   var data = {
-    title: 'たいむきらー',
-    title2: 'せーさくしゃじょーほー',
+    title: 'せーさくしゃじょーほー',
     tanakaName: '田中 翼',
     tanakaText: 'ほげほげ',
     nakamuraName: '中村 航生',
