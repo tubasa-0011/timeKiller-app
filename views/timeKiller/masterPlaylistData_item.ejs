@@ -2,14 +2,16 @@
     <% if(val[pl].flag==1) { %>
     <li class="menu">
         <div class="form-group">
-            <input type="checkbox" name="<%= pl %>" checked class="checks">
+            <input type="hidden" name="<%= val[pl].masterPlaylist.genreId %>" class="checks">
+            <input type="checkbox" name="<%= val[pl].masterPlaylist.genreId %>" checked class="checks" value="1">
             <label for="<%= pl %>"><%= val[pl].masterPlaylist.genreName %></label>
         </div>
     </li>
     <% } else { %>
     <li class="menu">
         <div class="form-group">
-            <input type="checkbox" name="<%= pl %>" class="checks">
+            <input type="hidden" name="<%= val[pl].masterPlaylist.genreId %>" class="checks">
+            <input type="checkbox" name="<%= val[pl].masterPlaylist.genreId %>" class="checks" value="1">
             <label for="<%= pl %>"><%= val[pl].masterPlaylist.genreName %></label>
         </div>
     </li>

@@ -24,9 +24,10 @@ function loginCheck(req, res) {
 router.get('/', (req, res, next) => {
   if (loginCheck(req, res, next)) { return };
   var data = {
-    title: req.session.login.name,
-    plName: 'さとう',
-    ver: 0.2
+    title: 'たいむきらー',
+    name: 'name',
+    namename: 'さとう',
+    ver: 2.0
   }
   res.render('timeKiller/index', data);
 });
@@ -45,7 +46,8 @@ router.get('/roulette', (req, res, next) => {
 router.get('/developer', (req, res, next) => {
   if (loginCheck(req, res, next)) { return };
   var data = {
-    title: 'せーさくしゃじょーほー',
+    title: 'たいむきらー',
+    title2: 'せーさくしゃじょーほー',
     tanakaName: '田中 翼',
     tanakaText: 'ほげほげ',
     nakamuraName: '中村 航生',
@@ -57,12 +59,13 @@ router.get('/developer', (req, res, next) => {
 });
 
 // 写経ページへのアクセス
-router.get('/syakyo', (req, res, next) => {
+router.get('/syakei', (req, res, next) => {
   if (loginCheck(req, res, next)) { return };
   var data = {
-    title: 'しゃきょー',
+    title: 'たいむきらー',
+    title2: 'しゃけー',
   }
-  res.render('timeKiller/syakyo', data);
+  res.render('timeKiller/syakei', data);
 });
 
 //検索フォームの送信処理
@@ -94,7 +97,6 @@ router.get('/playlist', (req, res, next) => {
   var mc = 0, cc = 0;
   db.masterPlaylist.findAll().then(mPls => {
     mc = Object(mPls).length;
-    console.log(mc)
   });
   db.customPlaylist.findAll({
       where: { 
@@ -103,7 +105,6 @@ router.get('/playlist', (req, res, next) => {
     }
   ).then(cPls => {
     cc = Object(cPls).length;
-    console.log(cc)
   });
   db.MyPlaylist.findAll({
     include: [
@@ -114,9 +115,6 @@ router.get('/playlist', (req, res, next) => {
       userId: req.session.login.id,
     },
   }).then(pls => {
-    for(let pl of pls){
-      console.log( pl );
-    }
       var data = {
         title: "Other",
         pls: pls,
@@ -129,9 +127,21 @@ router.get('/playlist', (req, res, next) => {
 
 //プレイリストフォームの送信処理
 router.post('/playlist', (req, res, next) => {
-  if (check(req, res, next)) { return }
-  console.log(req.body);
-  redirect('/timeKiller');
+  if (loginCheck(req, res, next)) { return }
+  for(var i in req.body){
+    if (req.body[i][1] != undefined) {
+      db.MyPlaylist.findOne({ where: { userId: req.session.login.id, genreId: i } }).then(pls => {
+        pls.flag = true;
+        pls.save();
+      })
+    }else{
+      db.MyPlaylist.findOne({ where: { userId: req.session.login.id, genreId: i } }).then(pls => {
+        pls.flag = false;
+        pls.save();
+      })
+    }
+  }
+  res.redirect('/timeKiller');
 });
 
 //新規プレイリスト追加の送信処理
@@ -143,30 +153,28 @@ router.post('/playlistAdd', (req, res, next) => {
       userId: req.session.login.id,
     },
   }).then(cPls => {
-  cc = Object(cPls).length;
-  console.log(cc)
+    cc = Object(cPls).length;
   });
-  db.sequelize.sync().then(() => db.customPlaylist.create({
-    userId: req.session.login.id,
-    genreId: 101 + cc,
-    genreName: req.body.detail,
-  })
-  .catch((err)=>{
-    res.redirect('/timeKiller/playlist');
-  })
-  )
-  db.sequelize.sync().then(() => db.MyPlaylist.create({
+  db.sequelize.sync().then(() => 
+    db.customPlaylist.create({
       userId: req.session.login.id,
       genreId: 101 + cc,
-      flag: true,
+      genreName: req.body.detail,
+    }).catch((err)=>{
+      res.redirect('/timeKiller/playlist');
     })
-      .then(brd => {
-        res.redirect('/timeKiller/playlist');
-      })
-      .catch((err)=>{
-        res.redirect('/timeKiller/playlist');
-      })
-    )
+  )
+  db.sequelize.sync().then(() => 
+    db.MyPlaylist.create({
+      userId: req.session.login.id,
+      genreId: 101 + cc,
+      flag: false,
+    }).then(brd => {
+      res.redirect('/timeKiller/playlist');
+    }).catch((err)=>{
+      res.redirect('/timeKiller/playlist');
+    })
+  )
 });
 
 //お問い合わせページ

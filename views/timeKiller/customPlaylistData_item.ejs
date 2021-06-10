@@ -1,17 +1,23 @@
 <% for(let pl=mc; pl<cc; pl++) {%>
+    <% for(let index=0; index<val[pl].customPlaylists.length; index++) { %>
+    <% if(val[pl].customPlaylists[index].userId==val[pl].userId) { %>
     <% if(val[pl].flag==1) { %>
     <li class="menu">
         <div class="form-group">
-            <input type="checkbox" name="<%= pl %>" checked class="checks">
-            <label for="<%= pl %>"><%= val[pl].customPlaylists[0].genreName %></label>
+            <input type="hidden" name="<%= val[pl].customPlaylists[index].genreId %>" class="checks">
+            <input type="checkbox" name="<%= val[pl].customPlaylists[index].genreId %>" checked class="checks" value="1">
+            <label for="<%= val[pl].customPlaylists[index].genreId %>"><%= val[pl].customPlaylists[index].genreName %></label>
         </div>
     </li>
     <% } else { %>
     <li class="menu">
         <div class="form-group">
-            <input type="checkbox" name="<%= pl %>" class="checks">
-            <label for="<%= pl %>"><%= val[pl].customPlaylists[0].genreName %></label>
+            <input type="hidden" name="<%= val[pl].customPlaylists[index].genreId %>" class="checks">
+            <input type="checkbox" name="<%= val[pl].customPlaylists[index].genreId %>" class="checks" value="1">
+            <label for="<%= val[pl].customPlaylists[index].genreId %>"><%= val[pl].customPlaylists[index].genreName %></label>
         </div>
     </li>
+    <% } %>
+    <% } %>
     <% } %>
 <% } %>
