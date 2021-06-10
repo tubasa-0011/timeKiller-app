@@ -7,7 +7,6 @@ var session = require('express-session');
 //ルート用のモジュールロード
 var indexRouter = require('./routes/timeKiller');
 var usersRouter = require('./routes/users');
-var helloRouter = require('./routes/hello');
 var boardsRouter = require('./routes/boards');
 var timeKillerRouter = require('./routes/timeKiller');
 var marksRouter = require('./routes/marks');
@@ -35,7 +34,6 @@ app.use(session(session_opt))
 app.use('/', indexRouter);
 app.use('/users', usersRouter);
 app.use('/boards', boardsRouter);
-app.use('/hello', helloRouter);
 app.use('/md', marksRouter);
 app.use('/timeKiller', timeKillerRouter);
 
