@@ -24,9 +24,7 @@ function loginCheck(req, res) {
 router.get('/', (req, res, next) => {
   if (loginCheck(req, res, next)) { return };
   var data = {
-    title: 'たいむきらー',
-    name: 'name',
-    namename: 'さとう',
+    title: req.session.login.name,
     ver: 2.0
   }
   res.render('timeKiller/index', data);
