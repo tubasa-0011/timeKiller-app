@@ -78,7 +78,7 @@ label{
 .playlistOpen-btn {
   display: block;
   width: 50%;
-  margin: 10% 25%;
+  margin: 0 25%;
   text-align: center;
   font-size: 30px;
   background: radial-gradient(#f2a0a1cc, rgba(255, 255, 255, 0.432));

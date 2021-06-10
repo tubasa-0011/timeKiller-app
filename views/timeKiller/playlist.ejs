@@ -51,8 +51,15 @@
             <br>
             <input type="submit" value="作成" class="playlistAdd-btn">
         </form>
+        <br><br>
         <form action="/timeKiller/playlistOpen" method="post">
-            <input type="submit" value="プレイリストを公開" class="playlistOpen-btn">
+            <% if(us.playlistFlag==1) { %>
+            <input type="checkbox" name="playlistOpen" checked value="1">
+            <% } else { %>
+            <input type="checkbox" name="playlistOpen"  value="1">
+            <% } %>
+            <label for="playlistOpen">プレイリストを公開する</label>
+            <input type="submit" value="公開・非公開を適用する" class="playlistOpen-btn">
         </form>
     </div>
     <!-- ↓ここからハンバーガーメニューの操作 -->

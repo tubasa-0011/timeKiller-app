@@ -95,6 +95,14 @@ router.post('/', (req, res, next) => {
 router.get('/playlist', (req, res, next) => {
   if (loginCheck(req, res, next)) { return };
   var mc = 0, cc = 0;
+  var us;
+  db.UserSetting.findOne({
+    where: { 
+      userId: req.session.login.id,
+    },
+  }).then(uss => {
+    us = uss;
+  });
   db.masterPlaylist.findAll().then(mPls => {
     mc = Object(mPls).length;
   });
@@ -118,12 +126,12 @@ router.get('/playlist', (req, res, next) => {
       ['genreId', 'ASC']
     ]
   }).then(pls => {
-    console.log(pls);
       var data = {
         title: "Other",
         pls: pls,
         mc: mc,
         cc: cc+mc,
+        us: us,
       }
       res.render('timeKiller/playlist', data);
   });
@@ -145,7 +153,7 @@ router.post('/playlist', (req, res, next) => {
       })
     }
   }
-  res.redirect('/timeKiller');
+  res.redirect('/timeKiller/playlist');
 });
 
 //新規プレイリスト追加の送信処理
@@ -179,6 +187,24 @@ router.post('/playlistAdd', (req, res, next) => {
       res.redirect('/timeKiller/playlist');
     })
   )
+});
+
+//プレイリスト公開・非公開の送信処理
+router.post('/playlistOpen', (req, res, next) => {
+  if (loginCheck(req, res, next)) { return }
+  console.log(req.body.playlistOpen);
+  if (req.body.playlistOpen != undefined) {
+    db.UserSetting.findOne({ where: { userId: req.session.login.id } }).then(uss => {
+      uss.playlistFlag = true;
+      uss.save();
+    })
+  }else{
+    db.UserSetting.findOne({ where: { userId: req.session.login.id } }).then(uss => {
+      uss.playlistFlag = false;
+      uss.save();
+    })
+  }
+  res.redirect('/timeKiller/playlist');
 });
 
 //お問い合わせページ
