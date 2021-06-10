@@ -114,7 +114,11 @@ router.get('/playlist', (req, res, next) => {
     where: { 
       userId: req.session.login.id,
     },
+    order: [
+      ['genreId', 'ASC']
+    ]
   }).then(pls => {
+    console.log(pls);
       var data = {
         title: "Other",
         pls: pls,
