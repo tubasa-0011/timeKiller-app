@@ -68,14 +68,6 @@ router.get('/syakyo', (req, res, next) => {
 router.get('/playlist', (req, res, next) => {
   if (loginCheck(req, res, next)) { return };
   var mc = 0, cc = 0;
-  var us;
-  db.UserSetting.findOne({
-    where: { 
-      userId: req.session.login.id,
-    },
-  }).then(uss => {
-    us = uss;
-  });
   db.masterPlaylist.findAll().then(mPls => {
     mc = Object(mPls).length;
   });
@@ -87,26 +79,32 @@ router.get('/playlist', (req, res, next) => {
   ).then(cPls => {
     cc = Object(cPls).length;
   });
-  db.MyPlaylist.findAll({
-    include: [
-      { model: db.masterPlaylist },
-      { model: db.customPlaylist },
-    ],
+  db.UserSetting.findOne({
     where: { 
       userId: req.session.login.id,
     },
-    order: [
-      ['genreId', 'ASC']
-    ]
-  }).then(pls => {
-      var data = {
-        title: "Other",
-        pls: pls,
-        mc: mc,
-        cc: cc+mc,
-        us: us,
-      }
-      res.render('timeKiller/playlist', data);
+  }).then(uss => {
+    db.MyPlaylist.findAll({
+      include: [
+        { model: db.masterPlaylist },
+        { model: db.customPlaylist },
+      ],
+      where: { 
+        userId: req.session.login.id,
+      },
+      order: [
+        ['genreId', 'ASC']
+      ]
+    }).then(pls => {
+        var data = {
+          title: "Other",
+          pls: pls,
+          mc: mc,
+          cc: cc+mc,
+          us: uss,
+        }
+        res.render('timeKiller/playlist', data);
+    });
   });
 });
 
