@@ -68,6 +68,6 @@ function draw() {
       fill("#fff");
       textSize(frameCount/10+20);
       textStyle(BOLD);
-      text("「"+"動画"+"」でひまつぶし！", cW, cH+100);
+      text("ひまつぶしかいし～！", cW, cH+100);
     }
 }
