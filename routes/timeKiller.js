@@ -213,7 +213,7 @@ router.post('/contact', [
   }else{
     sendMail({
       from: req.body.mail,
-      to: 't.tanaka@cuore.jp',
+      to: 't.tanaka@cuore.co.jp',
       subject: '㋪アプリ：' + req.session.login.name + '：' + req.body.subject,
       text: req.body.detail,
     }, function(err, reply) {
